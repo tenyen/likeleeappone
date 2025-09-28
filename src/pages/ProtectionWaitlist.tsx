@@ -9,8 +9,8 @@ export const ProtectionWaitlist = () => {
     lastName: "",
     email: "",
     phone: "",
-    notifications: "",
-    protectionLevel: ""
+    motivation1: "",
+    motivation2: ""
   });
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
@@ -25,7 +25,7 @@ export const ProtectionWaitlist = () => {
     e.preventDefault();
     
     try {
-      const response = await fetch('YOUR_GOOGLE_APPS_SCRIPT_URL', {
+      const response = await fetch('https://formspree.io/f/mjkagdbk', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -36,30 +36,28 @@ export const ProtectionWaitlist = () => {
           email: formData.email,
           phone: formData.phone,
           waitlistType: 'Protection Waitlist',
-          notificationPreference: formData.notifications,
-          protectionLevel: formData.protectionLevel
+          motivation1: formData.motivation1,
+          motivation2: formData.motivation2
         })
       });
 
-      const responseData = await response.json();
-      
-      if (responseData.success) {
-        alert('🎉 Successfully joined the Protection Waitlist!');
+      if (response.ok) {
+        alert('🎉 Successfully joined the Protection Waitlist! Your likeness is now being protected.');
         // Reset form
         setFormData({
           firstName: "",
           lastName: "",
           email: "",
           phone: "",
-          notifications: "",
-          protectionLevel: ""
+          motivation1: "",
+          motivation2: ""
         });
       } else {
-        throw new Error(responseData.error || 'Failed to submit');
+        throw new Error('Failed to submit');
       }
     } catch (error) {
       console.error('Error:', error);
-      alert(`Something went wrong: ${error.message}. Please try again or contact us directly.`);
+      alert('Something went wrong. Please try again or contact us directly.');
     }
   };
 
