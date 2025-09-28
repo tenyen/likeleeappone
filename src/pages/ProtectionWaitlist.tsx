@@ -44,7 +44,7 @@ export const ProtectionWaitlist = () => {
       const responseData = await response.json();
       
       if (responseData.success) {
-        alert('🎉 Successfully joined the Protection Waitlist! Your likeness is now being protected.');
+        alert('🎉 Successfully joined the Protection Waitlist!');
         // Reset form
         setFormData({
           firstName: "",
