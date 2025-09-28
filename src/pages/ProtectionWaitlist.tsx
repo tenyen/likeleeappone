@@ -21,11 +21,46 @@ export const ProtectionWaitlist = () => {
     }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Handle form submission here
-    console.log("Protection Waitlist Form Data:", formData);
-    // You can add API call here
+    
+    try {
+      const response = await fetch('YOUR_GOOGLE_APPS_SCRIPT_URL', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          firstName: formData.firstName,
+          lastName: formData.lastName,
+          email: formData.email,
+          phone: formData.phone,
+          waitlistType: 'Protection Waitlist',
+          notificationPreference: formData.notifications,
+          protectionLevel: formData.protectionLevel
+        })
+      });
+
+      const responseData = await response.json();
+      
+      if (responseData.success) {
+        alert('🎉 Successfully joined the Protection Waitlist! Your likeness is now being protected.');
+        // Reset form
+        setFormData({
+          firstName: "",
+          lastName: "",
+          email: "",
+          phone: "",
+          notifications: "",
+          protectionLevel: ""
+        });
+      } else {
+        throw new Error(responseData.error || 'Failed to submit');
+      }
+    } catch (error) {
+      console.error('Error:', error);
+      alert(`Something went wrong: ${error.message}. Please try again or contact us directly.`);
+    }
   };
 
   return (

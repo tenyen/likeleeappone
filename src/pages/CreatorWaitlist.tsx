@@ -9,8 +9,8 @@ export const CreatorWaitlist = () => {
     lastName: "",
     email: "",
     phone: "",
-    projectTypes: "",
-    frustration: ""
+    motivation1: "",
+    motivation2: ""
   });
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
@@ -21,11 +21,44 @@ export const CreatorWaitlist = () => {
     }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Handle form submission here
-    console.log("Creator Waitlist Form Data:", formData);
-    // You can add API call here
+    
+    try {
+      const response = await fetch('https://formspree.io/f/mjkagdbk', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          firstName: formData.firstName,
+          lastName: formData.lastName,
+          email: formData.email,
+          phone: formData.phone,
+          waitlistType: 'Creator Waitlist',
+          motivation1: formData.motivation1,
+          motivation2: formData.motivation2
+        })
+      });
+
+      if (response.ok) {
+        alert('🎉 Successfully joined the Creator Waitlist! We\'ll be in touch soon.');
+        // Reset form
+        setFormData({
+          firstName: "",
+          lastName: "",
+          email: "",
+          phone: "",
+          motivation1: "",
+          motivation2: ""
+        });
+      } else {
+        throw new Error('Failed to submit');
+      }
+    } catch (error) {
+      console.error('Error:', error);
+      alert('Something went wrong. Please try again or contact us directly.');
+    }
   };
 
   return (

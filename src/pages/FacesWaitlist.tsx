@@ -9,8 +9,8 @@ export const FacesWaitlist = () => {
     lastName: "",
     email: "",
     phone: "",
-    projectTypes: "",
-    motivation: ""
+    motivation1: "",
+    motivation2: ""
   });
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
@@ -21,11 +21,44 @@ export const FacesWaitlist = () => {
     }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Handle form submission here
-    console.log("Faces Waitlist Form Data:", formData);
-    // You can add API call here
+    
+    try {
+      const response = await fetch('https://formspree.io/f/mjkagdbk', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          firstName: formData.firstName,
+          lastName: formData.lastName,
+          email: formData.email,
+          phone: formData.phone,
+          waitlistType: 'Faces Waitlist',
+          motivation1: formData.motivation1,
+          motivation2: formData.motivation2
+        })
+      });
+
+      if (response.ok) {
+        alert('🎉 Successfully joined the Faces Waitlist! We\'ll be in touch soon.');
+        // Reset form
+        setFormData({
+          firstName: "",
+          lastName: "",
+          email: "",
+          phone: "",
+          motivation1: "",
+          motivation2: ""
+        });
+      } else {
+        throw new Error('Failed to submit');
+      }
+    } catch (error) {
+      console.error('Error:', error);
+      alert('Something went wrong. Please try again or contact us directly.');
+    }
   };
 
   return (
@@ -171,12 +204,13 @@ export const FacesWaitlist = () => {
                     {/* Specific Questions */}
                     <div className="box-border caret-transparent outline-[oklab(0.839909_-0.141908_-0.0158958_/_0.5)] mb-6">
                       <label className="text-sm font-medium items-center box-border caret-transparent gap-x-2 block leading-5 outline-[oklab(0.839909_-0.141908_-0.0158958_/_0.5)] gap-y-2 mb-2">
-                        Would you like your likeness to be used only for certain project types?
+                        Would you like your likeness to be used only for certain project types? *
                       </label>
                       <select
-                        name="projectTypes"
-                        value={formData.projectTypes}
+                        name="motivation1"
+                        value={formData.motivation1}
                         onChange={handleInputChange}
+                        required
                         className="text-base bg-stone-50 box-border caret-transparent flex h-12 leading-6 outline-[oklab(0.839909_-0.141908_-0.0158958_/_0.5)] text-start w-full border px-3 py-1 rounded-lg border-solid border-transparent md:text-sm md:leading-5"
                       >
                         <option value="">Select your preference</option>
@@ -194,8 +228,8 @@ export const FacesWaitlist = () => {
                         What excites you most about joining Likelee?
                       </label>
                       <select
-                        name="motivation"
-                        value={formData.motivation}
+                        name="motivation2"
+                        value={formData.motivation2}
                         onChange={handleInputChange}
                         className="text-base bg-stone-50 box-border caret-transparent flex h-12 leading-6 outline-[oklab(0.839909_-0.141908_-0.0158958_/_0.5)] text-start w-full border px-3 py-1 rounded-lg border-solid border-transparent md:text-sm md:leading-5"
                       >
