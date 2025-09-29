@@ -1,8 +1,9 @@
 import { RotatingHeadline } from "@/components/RotatingHeadline";
+import { MaterializeText } from "@/components/MaterializeText";
 
 export const HeroHeader = () => {
   return (
-    <div className="box-border caret-transparent outline-[oklab(0.839909_-0.141908_-0.0158958_/_0.5)] text-center mb-12">
+    <div className="box-border caret-transparent outline-[oklab(0.839909_-0.141908_-0.0158958_/_0.5)] text-center mb-8">
       <div className="flex justify-center mb-6">
         <button 
           onClick={() => {
@@ -25,7 +26,10 @@ export const HeroHeader = () => {
       <RotatingHeadline />
       
       <p className="text-neutral-500 text-xl box-border caret-transparent leading-7 max-w-screen-md outline-[oklab(0.839909_-0.141908_-0.0158958_/_0.5)] mx-auto mb-4">
-        Likelee is here to protect your face in the age of AI. Always free.
+        <MaterializeText 
+          text="Likelee is here to protect your face in the age of AI. Always free."
+          delay={1000}
+        />
       </p>
     </div>
   );
