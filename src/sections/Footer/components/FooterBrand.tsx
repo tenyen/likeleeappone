@@ -3,7 +3,7 @@ export const FooterBrand = () => {
     <div className="box-border caret-transparent col-end-auto col-start-auto outline-[oklab(0.839909_-0.141908_-0.0158958_/_0.5)] md:col-end-[span_1] md:col-start-[span_1]">
       <div className="items-center box-border caret-transparent flex outline-[oklab(0.839909_-0.141908_-0.0158958_/_0.5)] mb-4">
         <img
-          src="https://c.animaapp.com/mg05rtqgllY9ko/img/chatgpt-image-sep-25-2025-09_54_14-pm.png"
+          src="https://c.animaapp.com/mg4iljce82GyUu/img/chatgpt-image-sep-25-2025-09_54_14-pm.png"
           alt="Likelee.ai Logo"
           className="box-border caret-transparent h-6 outline-[oklab(0.839909_-0.141908_-0.0158958_/_0.5)] w-6 mr-2"
         />
