@@ -3,14 +3,14 @@ import { useNavigate } from "react-router-dom";
 
 const headlines = [
   "Rent your face from your bedroom. Set your price, or earn ongoing royalties.",
-  "Take control.",
-  "Creators: access real, human faces for your AI Driven projects."
+  "Creators: access real, human faces for your AI Driven projects.",
+  "Your face — your terms. Track where your likeness appears and set safe parameters for usage."
 ];
 
 const gradients = [
   "bg-gradient-to-r from-[#5CE1E6] via-[#5CE1E6] to-[#4FD1C7]", // Teal gradient
-  "bg-gradient-to-r from-[#FF6B6B] via-[#FF6B6B] to-[#FF5252]", // Coral gradient
-  "bg-gradient-to-r from-[#FFC94D] via-[#FFC94D] to-[#FFB74D]"  // Amber gradient
+  "bg-gradient-to-r from-[#FFC94D] via-[#FFC94D] to-[#FFB74D]",  // Amber gradient (now second)
+  "bg-gradient-to-r from-[#FF6B6B] via-[#FF6B6B] to-[#FF5252]"   // Coral gradient (now third)
 ];
 
 const headlineActions = [
@@ -26,18 +26,18 @@ const headlineActions = [
   () => {
     const waitlistSection = document.getElementById('waitlist-cards');
     if (waitlistSection) {
-      const protectionCard = waitlistSection.querySelector('[data-card="protection"]');
-      if (protectionCard) {
-        protectionCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      const creatorCard = waitlistSection.querySelector('[data-card="creator"]');
+      if (creatorCard) {
+        creatorCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
       }
     }
   },
   () => {
     const waitlistSection = document.getElementById('waitlist-cards');
     if (waitlistSection) {
-      const creatorCard = waitlistSection.querySelector('[data-card="creator"]');
-      if (creatorCard) {
-        creatorCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      const protectionCard = waitlistSection.querySelector('[data-card="protection"]');
+      if (protectionCard) {
+        protectionCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
       }
     }
   }
