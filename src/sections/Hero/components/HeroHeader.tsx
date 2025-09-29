@@ -14,12 +14,12 @@ export const HeroHeader = () => {
       
       <RotatingHeadline />
       
-      <p className="text-neutral-500 text-xl box-border caret-transparent leading-7 max-w-screen-md outline-[oklab(0.839909_-0.141908_-0.0158958_/_0.5)] mx-auto">
+      <p className="text-neutral-500 text-xl box-border caret-transparent leading-7 max-w-screen-md outline-[oklab(0.839909_-0.141908_-0.0158958_/_0.5)] mx-auto mb-4">
         Likelee is here to protect your face in the age of AI. Always free.
-        <span className="text-zinc-900 font-medium box-border caret-transparent outline-[oklab(0.839909_-0.141908_-0.0158958_/_0.5)]">
-          {" "}
-          Explore waitlist options below.
-        </span>
+      </p>
+      
+      <p className="text-zinc-900 font-medium text-xl box-border caret-transparent leading-7 max-w-screen-md outline-[oklab(0.839909_-0.141908_-0.0158958_/_0.5)] mx-auto">
+        Explore waitlist options below.
       </p>
     </div>
   );

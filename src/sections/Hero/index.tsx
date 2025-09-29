@@ -1,5 +1,6 @@
 import { HeroHeader } from "@/sections/Hero/components/HeroHeader";
 import { WaitlistCards } from "@/sections/Hero/components/WaitlistCards";
+import { FilmStrip } from "@/components/FilmStrip";
 
 export const Hero = () => {
   return (
@@ -7,6 +8,11 @@ export const Hero = () => {
       <div className="box-border caret-transparent max-w-none outline-[oklab(0.839909_-0.141908_-0.0158958_/_0.5)] w-full mx-auto px-4 md:max-w-screen-xl">
         <div className="box-border caret-transparent max-w-screen-lg outline-[oklab(0.839909_-0.141908_-0.0158958_/_0.5)] mx-auto">
           <HeroHeader />
+        </div>
+      </div>
+      <FilmStrip />
+      <div className="box-border caret-transparent max-w-none outline-[oklab(0.839909_-0.141908_-0.0158958_/_0.5)] w-full mx-auto px-4 md:max-w-screen-xl">
+        <div className="box-border caret-transparent max-w-screen-lg outline-[oklab(0.839909_-0.141908_-0.0158958_/_0.5)] mx-auto">
           <WaitlistCards />
         </div>
       </div>
