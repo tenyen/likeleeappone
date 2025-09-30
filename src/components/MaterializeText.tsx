@@ -47,11 +47,6 @@ export const MaterializeText = ({ text, className = "", delay = 0 }: Materialize
           {char === ' ' ? '\u00A0' : char}
         </span>
       ))}
-      
-      {/* Typing cursor effect */}
-      {visibleChars < text.length && (
-        <span className="inline-block w-0.5 h-5 bg-neutral-400 ml-0.5 animate-pulse"></span>
-      )}
     </span>
   );
 };
