@@ -4,9 +4,8 @@ import { useNavigate } from "react-router-dom";
 export const WaitlistCards = () => {
   const navigate = useNavigate();
   return (
-    <div id="waitlist-cards" className="box-border caret-transparent gap-x-6 grid grid-cols-none outline-[oklab(0.839909_-0.141908_-0.0158958_/_0.5)] gap-y-6 mb-8 md:grid-cols-[repeat(3,minmax(0px,1fr))]">
-      <div data-card="faces">
-        <WaitlistCard
+    <div className="box-border caret-transparent gap-x-6 grid grid-cols-none outline-[oklab(0.839909_-0.141908_-0.0158958_/_0.5)] gap-y-6 mb-8 md:grid-cols-[repeat(3,minmax(0px,1fr))]">
+      <WaitlistCard
         cardVariant="bg-white border-zinc-900/10"
         iconSrc="https://c.animaapp.com/mg05rtqgllY9ko/assets/icon-5.svg"
         iconVariant="bg-[oklab(0.839909_-0.141908_-0.0158958_/_0.1)]"
@@ -28,10 +27,8 @@ export const WaitlistCards = () => {
         footerVariant="border-zinc-900/10"
         showTopIcon={false}
         onClick={() => navigate('/faces-waitlist')}
-        />
-      </div>
-      <div data-card="protection">
-        <WaitlistCard
+      />
+      <WaitlistCard
         cardVariant="bg-white border-zinc-900/10"
         iconSrc="https://c.animaapp.com/mg05rtqgllY9ko/assets/icon-10.svg"
         iconVariant="bg-[oklab(0.890537_0.003488_0.133287_/_0.1)]"
@@ -53,10 +50,8 @@ export const WaitlistCards = () => {
         footerVariant="border-[oklab(0.890537_0.003488_0.133287_/_0.1)]"
         showTopIcon={false}
         onClick={() => navigate('/protection-waitlist')}
-        />
-      </div>
-      <div data-card="creator">
-        <WaitlistCard
+      />
+      <WaitlistCard
         cardVariant="bg-white border-zinc-900/10"
         iconSrc="https://c.animaapp.com/mg05rtqgllY9ko/assets/icon-8.svg"
         iconVariant="bg-[oklab(0.711593_0.167053_0.0703646_/_0.1)]"
@@ -78,8 +73,7 @@ export const WaitlistCards = () => {
         footerVariant="border-[oklab(0.711593_0.167053_0.0703646_/_0.1)]"
         showTopIcon={false}
         onClick={() => navigate('/creator-waitlist')}
-        />
-      </div>
+      />
     </div>
   );
 };
