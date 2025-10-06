@@ -2,15 +2,15 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Footer } from "@/sections/Footer";
 
-export const CreatorWaitlist = () => {
+export const BrandsStudiosWaitlist = () => {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
     email: "",
     phone: "",
-    motivation1: "",
-    motivation2: ""
+    projectTypes: "",
+    frustration: ""
   });
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
@@ -35,9 +35,9 @@ export const CreatorWaitlist = () => {
           lastName: formData.lastName,
           email: formData.email,
           phone: formData.phone,
-          waitlistType: 'Creator Waitlist',
-          motivation1: formData.motivation1,
-          motivation2: formData.motivation2
+          waitlistType: 'Brands & Studios Waitlist',
+          projectTypes: formData.projectTypes,
+          frustration: formData.frustration
         })
       });
 
@@ -52,8 +52,8 @@ export const CreatorWaitlist = () => {
         lastName: "",
         email: "",
         phone: "",
-        motivation1: "",
-        motivation2: ""
+        projectTypes: "",
+        frustration: ""
       });
     } catch (error) {
       console.error('Error:', error);
@@ -79,25 +79,25 @@ export const CreatorWaitlist = () => {
                   </button>
                   
                   <div className="items-center box-border caret-transparent flex justify-center outline-[oklab(0.839909_-0.141908_-0.0158958_/_0.5)] mb-6">
-                    <div className="items-center bg-[oklab(0.890537_0.003488_0.133287_/_0.1)] box-border caret-transparent flex h-12 justify-center outline-[oklab(0.839909_-0.141908_-0.0158958_/_0.5)] w-12 mr-3">
+                    <div className="items-center bg-[oklab(0.711593_0.167053_0.0703646_/_0.1)] box-border caret-transparent flex h-12 justify-center outline-[oklab(0.839909_-0.141908_-0.0158958_/_0.5)] w-12 mr-3">
                       <img
-                        src="https://c.animaapp.com/mg05rtqgllY9ko/assets/icon-10.svg"
+                        src="https://c.animaapp.com/mg05rtqgllY9ko/assets/icon-8.svg"
                         alt="Icon"
-                        className="text-orange-300 box-border caret-transparent h-6 outline-[oklab(0.839909_-0.141908_-0.0158958_/_0.5)] w-6"
+                        className="text-red-400 box-border caret-transparent h-6 outline-[oklab(0.839909_-0.141908_-0.0158958_/_0.5)] w-6"
                       />
                     </div>
                     <div className="box-border caret-transparent outline-[oklab(0.839909_-0.141908_-0.0158958_/_0.5)]">
                       <h1 className="text-3xl font-bold box-border caret-transparent leading-9 outline-[oklab(0.839909_-0.141908_-0.0158958_/_0.5)] md:text-4xl">
-                        Creator Waitlist
+                        Brands & Studios Waitlist
                       </h1>
                       <p className="text-neutral-500 text-lg box-border caret-transparent leading-6 outline-[oklab(0.839909_-0.141908_-0.0158958_/_0.5)]">
-                        For AI artists, filmmakers, and creative technologists
+                        For directors & brands
                       </p>
                     </div>
                   </div>
                   
                   <p className="text-neutral-500 text-lg box-border caret-transparent leading-7 max-w-screen-sm outline-[oklab(0.839909_-0.141908_-0.0158958_/_0.5)] mx-auto">
-                    Showcase your talent and connect with studios seeking next-generation creators for AI-driven campaigns and films.
+                    Find and license authentic faces for your creative projects. Access diverse talent from our community.
                   </p>
                 </div>
 
@@ -109,27 +109,27 @@ export const CreatorWaitlist = () => {
                     </h3>
                     <div className="box-border caret-transparent gap-y-4 flex flex-col outline-[oklab(0.839909_-0.141908_-0.0158958_/_0.5)] text-left">
                       <div className="items-start box-border caret-transparent flex outline-[oklab(0.839909_-0.141908_-0.0158958_/_0.5)]">
-                        <div className="bg-orange-300 box-border caret-transparent h-6 outline-[oklab(0.839909_-0.141908_-0.0158958_/_0.5)] w-6 mr-3 rounded-full flex items-center justify-center shrink-0 mt-0.5">
+                        <div className="bg-red-400 box-border caret-transparent h-6 outline-[oklab(0.839909_-0.141908_-0.0158958_/_0.5)] w-6 mr-3 rounded-full flex items-center justify-center shrink-0 mt-0.5">
                           <span className="text-white text-xs font-medium">1</span>
                         </div>
                         <p className="text-sm box-border caret-transparent leading-5 outline-[oklab(0.839909_-0.141908_-0.0158958_/_0.5)]">
-                          Build your professional portfolio showcasing your AI creative work.
+                          Post a project brief or search our talent pool.
                         </p>
                       </div>
                       <div className="items-start box-border caret-transparent flex outline-[oklab(0.839909_-0.141908_-0.0158958_/_0.5)]">
-                        <div className="bg-orange-300 box-border caret-transparent h-6 outline-[oklab(0.839909_-0.141908_-0.0158958_/_0.5)] w-6 mr-3 rounded-full flex items-center justify-center shrink-0 mt-0.5">
+                        <div className="bg-red-400 box-border caret-transparent h-6 outline-[oklab(0.839909_-0.141908_-0.0158958_/_0.5)] w-6 mr-3 rounded-full flex items-center justify-center shrink-0 mt-0.5">
                           <span className="text-white text-xs font-medium">2</span>
                         </div>
                         <p className="text-sm box-border caret-transparent leading-5 outline-[oklab(0.839909_-0.141908_-0.0158958_/_0.5)]">
-                          Connect with studios, brands, and agencies seeking AI talent.
+                          License faces securely with proof-of-rights included.
                         </p>
                       </div>
                       <div className="items-start box-border caret-transparent flex outline-[oklab(0.839909_-0.141908_-0.0158958_/_0.5)]">
-                        <div className="bg-orange-300 box-border caret-transparent h-6 outline-[oklab(0.839909_-0.141908_-0.0158958_/_0.5)] w-6 mr-3 rounded-full flex items-center justify-center shrink-0 mt-0.5">
+                        <div className="bg-red-400 box-border caret-transparent h-6 outline-[oklab(0.839909_-0.141908_-0.0158958_/_0.5)] w-6 mr-3 rounded-full flex items-center justify-center shrink-0 mt-0.5">
                           <span className="text-white text-xs font-medium">3</span>
                         </div>
                         <p className="text-sm box-border caret-transparent leading-5 outline-[oklab(0.839909_-0.141908_-0.0158958_/_0.5)]">
-                          Get hired for paid collaborations and exclusive film projects.
+                          Download assets instantly and launch campaigns faster.
                         </p>
                       </div>
                     </div>
@@ -247,9 +247,9 @@ export const CreatorWaitlist = () => {
 
                     <button
                       type="submit"
-                      className="text-sm font-medium items-center bg-orange-300 caret-transparent gap-x-2 inline-flex shrink-0 h-10 justify-center leading-5 outline-[oklab(0.839909_-0.141908_-0.0158958_/_0.5)] gap-y-2 text-nowrap w-full px-4 py-0 border-2 border-black hover:bg-orange-400 transition-colors"
+                      className="text-sm font-medium items-center bg-red-400 caret-transparent gap-x-2 inline-flex shrink-0 h-10 justify-center leading-5 outline-[oklab(0.839909_-0.141908_-0.0158958_/_0.5)] gap-y-2 text-nowrap w-full px-4 py-0 border-2 border-black hover:bg-red-500 transition-colors"
                     >
-                      Join Creator Waitlist
+                      Join Brands & Studios Waitlist
                       <img
                         src="https://c.animaapp.com/mg05rtqgllY9ko/assets/icon-13.svg"
                         alt="Icon"

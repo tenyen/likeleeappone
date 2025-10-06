@@ -131,7 +131,7 @@ export const FilmStrip = () => {
             {[...faces, ...faces, ...faces].map((face, index) => (
               <div
                 key={`${face.id}-${index}`}
-                className="relative flex-shrink-0 w-40 h-48 overflow-hidden cursor-pointer transform transition-all duration-300 hover:scale-105 hover:z-20 rounded-xl shadow-lg"
+                className="relative flex-shrink-0 w-40 h-48 overflow-hidden cursor-pointer transform transition-all duration-300 hover:scale-105 hover:z-20 shadow-lg border-2 border-black"
                 onMouseEnter={() => setHoveredFace(face.id)}
                 onMouseLeave={() => setHoveredFace(null)}
               >

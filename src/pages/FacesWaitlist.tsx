@@ -42,19 +42,19 @@ export const FacesWaitlist = () => {
       });
 
       if (response.ok) {
-        alert('🎉 Successfully joined the Faces Waitlist! We\'ll be in touch soon.');
-        // Reset form
-        setFormData({
-          firstName: "",
-          lastName: "",
-          email: "",
-          phone: "",
-          motivation1: "",
-          motivation2: ""
-        });
+        navigate('/thank-you'); // Redirect to ThankYou page
       } else {
         throw new Error('Failed to submit');
       }
+      // Reset form regardless of success, or only on success if preferred
+      setFormData({
+        firstName: "",
+        lastName: "",
+        email: "",
+        phone: "",
+        motivation1: "",
+        motivation2: ""
+      });
     } catch (error) {
       console.error('Error:', error);
       alert('Something went wrong. Please try again or contact us directly.');
@@ -65,7 +65,7 @@ export const FacesWaitlist = () => {
     <div className="fixed box-border caret-transparent h-[952px] outline-[oklab(0.839909_-0.141908_-0.0158958_/_0.5)] overflow-auto inset-0">
       <div className="relative box-border caret-transparent basis-0 grow shrink-0 h-[952px] min-h-px min-w-px outline-[oklab(0.839909_-0.141908_-0.0158958_/_0.5)] w-full">
         <div className="bg-white box-border caret-transparent min-h-[952px] outline-[oklab(0.839909_-0.141908_-0.0158958_/_0.5)]">
-          <main className="bg-[linear-gradient(oklab(0.979073_0.0000444055_0.0000195503_/_0.3)_0%,rgb(255,255,255)_50%,oklab(0.839909_-0.141908_-0.0158958_/_0.05)_100%)] box-border caret-transparent outline-[oklab(0.839909_-0.141908_-0.0158958_/_0.5)] py-16 md:py-24">
+          <main className="bg-gradient-to-br from-[#F4FDFD] via-[#F8EDE6] to-[#FFFCF5] box-border caret-transparent outline-[oklab(0.839909_-0.141908_-0.0158958_/_0.5)] py-16 md:py-24">
             <div className="box-border caret-transparent max-w-none outline-[oklab(0.839909_-0.141908_-0.0158958_/_0.5)] w-full mx-auto px-4 md:max-w-screen-xl">
               <div className="box-border caret-transparent max-w-screen-md outline-[oklab(0.839909_-0.141908_-0.0158958_/_0.5)] mx-auto">
                 
@@ -79,7 +79,7 @@ export const FacesWaitlist = () => {
                   </button>
                   
                   <div className="items-center box-border caret-transparent flex justify-center outline-[oklab(0.839909_-0.141908_-0.0158958_/_0.5)] mb-6">
-                    <div className="items-center bg-[oklab(0.839909_-0.141908_-0.0158958_/_0.1)] box-border caret-transparent flex h-12 justify-center outline-[oklab(0.839909_-0.141908_-0.0158958_/_0.5)] w-12 mr-3 rounded-[14px]">
+                    <div className="items-center bg-[oklab(0.839909_-0.141908_-0.0158958_/_0.1)] box-border caret-transparent flex h-12 justify-center outline-[oklab(0.839909_-0.141908_-0.0158958_/_0.5)] w-12 mr-3">
                       <img
                         src="https://c.animaapp.com/mg05rtqgllY9ko/assets/icon-5.svg"
                         alt="Icon"
@@ -102,7 +102,7 @@ export const FacesWaitlist = () => {
                 </div>
 
                 {/* How It Works */}
-                <div className="bg-white box-border caret-transparent gap-x-6 flex flex-col outline-[oklab(0.839909_-0.141908_-0.0158958_/_0.5)] gap-y-6 border border-zinc-900/10 p-6 rounded-[14px] border-solid mb-8">
+                <div className="bg-white box-border caret-transparent gap-x-6 flex flex-col outline-[oklab(0.839909_-0.141908_-0.0158958_/_0.5)] gap-y-6 border-2 border-black p-6 mb-8">
                   <div className="box-border caret-transparent outline-[oklab(0.839909_-0.141908_-0.0158958_/_0.5)] text-center">
                     <h3 className="text-lg font-semibold box-border caret-transparent leading-7 outline-[oklab(0.839909_-0.141908_-0.0158958_/_0.5)] mb-4">
                       How It Works
@@ -137,7 +137,7 @@ export const FacesWaitlist = () => {
                 </div>
 
                 {/* Form */}
-                <div className="bg-[linear-gradient(to_right_bottom,oklab(0.839909_-0.141908_-0.0158958_/_0.1)_0%,oklab(0.839909_-0.141908_-0.0158958_/_0.05)_100%)] shadow-[rgba(0,0,0,0)_0px_0px_0px_0px,rgba(0,0,0,0)_0px_0px_0px_0px,rgba(0,0,0,0)_0px_0px_0px_0px,rgb(34,232,217)_0px_0px_0px_2px,rgba(0,0,0,0)_0px_0px_0px_0px] box-border caret-transparent gap-x-6 flex flex-col outline-[oklab(0.839909_-0.141908_-0.0158958_/_0.5)] gap-y-6 border border-[oklab(0.839909_-0.141908_-0.0158958_/_0.3)] p-8 rounded-[14px] border-solid">
+                <div className="bg-[linear-gradient(to_right_bottom,oklab(0.839909_-0.141908_-0.0158958_/_0.1)_0%,oklab(0.839909_-0.141908_-0.0158958_/_0.05)_100%)] box-border caret-transparent gap-x-6 flex flex-col outline-[oklab(0.839909_-0.141908_-0.0158958_/_0.5)] gap-y-6 border-2 border-black p-8">
                   <form onSubmit={handleSubmit} className="box-border caret-transparent outline-[oklab(0.839909_-0.141908_-0.0158958_/_0.5)]">
                     
                     {/* Basic Info */}
@@ -153,7 +153,7 @@ export const FacesWaitlist = () => {
                           value={formData.firstName}
                           onChange={handleInputChange}
                           required
-                          className="text-base bg-stone-50 box-border caret-transparent flex h-12 leading-6 outline-[oklab(0.839909_-0.141908_-0.0158958_/_0.5)] text-start w-full border px-3 py-1 rounded-lg border-solid border-transparent md:text-sm md:leading-5"
+                          className="text-base bg-stone-50 box-border caret-transparent flex h-12 leading-6 outline-[oklab(0.839909_-0.141908_-0.0158958_/_0.5)] text-start w-full border-2 border-black px-3 py-1 md:text-sm md:leading-5"
                         />
                       </div>
                       <div className="box-border caret-transparent outline-[oklab(0.839909_-0.141908_-0.0158958_/_0.5)]">
@@ -166,7 +166,7 @@ export const FacesWaitlist = () => {
                           placeholder="Last name (optional)"
                           value={formData.lastName}
                           onChange={handleInputChange}
-                          className="text-base bg-stone-50 box-border caret-transparent flex h-12 leading-6 outline-[oklab(0.839909_-0.141908_-0.0158958_/_0.5)] text-start w-full border px-3 py-1 rounded-lg border-solid border-transparent md:text-sm md:leading-5"
+                          className="text-base bg-stone-50 box-border caret-transparent flex h-12 leading-6 outline-[oklab(0.839909_-0.141908_-0.0158958_/_0.5)] text-start w-full border-2 border-black px-3 py-1 md:text-sm md:leading-5"
                         />
                       </div>
                     </div>
@@ -182,7 +182,7 @@ export const FacesWaitlist = () => {
                         value={formData.email}
                         onChange={handleInputChange}
                         required
-                        className="text-base bg-stone-50 box-border caret-transparent flex h-12 leading-6 outline-[oklab(0.839909_-0.141908_-0.0158958_/_0.5)] text-start w-full border px-3 py-1 rounded-lg border-solid border-transparent md:text-sm md:leading-5"
+                        className="text-base bg-stone-50 box-border caret-transparent flex h-12 leading-6 outline-[oklab(0.839909_-0.141908_-0.0158958_/_0.5)] text-start w-full border-2 border-black px-3 py-1 md:text-sm md:leading-5"
                       />
                     </div>
 
@@ -197,7 +197,7 @@ export const FacesWaitlist = () => {
                         value={formData.phone}
                         onChange={handleInputChange}
                         required
-                        className="text-base bg-stone-50 box-border caret-transparent flex h-12 leading-6 outline-[oklab(0.839909_-0.141908_-0.0158958_/_0.5)] text-start w-full border px-3 py-1 rounded-lg border-solid border-transparent md:text-sm md:leading-5"
+                        className="text-base bg-stone-50 box-border caret-transparent flex h-12 leading-6 outline-[oklab(0.839909_-0.141908_-0.0158958_/_0.5)] text-start w-full border-2 border-black px-3 py-1 md:text-sm md:leading-5"
                       />
                     </div>
 
@@ -211,7 +211,7 @@ export const FacesWaitlist = () => {
                         value={formData.motivation1}
                         onChange={handleInputChange}
                         required
-                        className="text-base bg-stone-50 box-border caret-transparent flex h-12 leading-6 outline-[oklab(0.839909_-0.141908_-0.0158958_/_0.5)] text-start w-full border px-3 py-1 rounded-lg border-solid border-transparent md:text-sm md:leading-5"
+                        className="text-base bg-stone-50 box-border caret-transparent flex h-12 leading-6 outline-[oklab(0.839909_-0.141908_-0.0158958_/_0.5)] text-start w-full border-2 border-black px-3 py-1 md:text-sm md:leading-5"
                       >
                         <option value="">Select your preference</option>
                         <option value="films-only">Films only</option>
@@ -231,7 +231,7 @@ export const FacesWaitlist = () => {
                         name="motivation2"
                         value={formData.motivation2}
                         onChange={handleInputChange}
-                        className="text-base bg-stone-50 box-border caret-transparent flex h-12 leading-6 outline-[oklab(0.839909_-0.141908_-0.0158958_/_0.5)] text-start w-full border px-3 py-1 rounded-lg border-solid border-transparent md:text-sm md:leading-5"
+                        className="text-base bg-stone-50 box-border caret-transparent flex h-12 leading-6 outline-[oklab(0.839909_-0.141908_-0.0158958_/_0.5)] text-start w-full border-2 border-black px-3 py-1 md:text-sm md:leading-5"
                       >
                         <option value="">Select what excites you most</option>
                         <option value="income">Earning passive income</option>
@@ -245,7 +245,7 @@ export const FacesWaitlist = () => {
 
                     <button
                       type="submit"
-                      className="text-sm font-medium items-center bg-cyan-400 caret-transparent gap-x-2 inline-flex shrink-0 h-10 justify-center leading-5 outline-[oklab(0.839909_-0.141908_-0.0158958_/_0.5)] gap-y-2 text-nowrap w-full px-4 py-0 rounded-lg hover:bg-cyan-500 transition-colors"
+                      className="text-sm font-medium items-center bg-cyan-400 caret-transparent gap-x-2 inline-flex shrink-0 h-10 justify-center leading-5 outline-[oklab(0.839909_-0.141908_-0.0158958_/_0.5)] gap-y-2 text-nowrap w-full px-4 py-0 border-2 border-black hover:bg-cyan-500 transition-colors"
                     >
                       Join Faces Waitlist
                       <img

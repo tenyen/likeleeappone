@@ -1,21 +1,56 @@
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 const headlines = [
   "Rent your face from your bedroom. Set your price, or earn ongoing royalties.",
-  "Choose how your face gets used and protect your likeness.",
-  "Creators: access real, human faces for your AI Driven projects."
+  "Brands & Studios: access real, human faces for your AI Driven projects.",
+  "AI Creators: showcase your talent and get hired for next-gen campaigns."
 ];
 
 const gradients = [
   "bg-gradient-to-r from-[#5CE1E6] via-[#5CE1E6] to-[#4FD1C7]", // Teal gradient
-  "bg-gradient-to-r from-[#FF6B6B] via-[#FF6B6B] to-[#FF5252]", // Coral gradient
-  "bg-gradient-to-r from-[#FFC94D] via-[#FFC94D] to-[#FFB74D]"  // Amber gradient
+  "bg-gradient-to-r from-[#FFC94D] via-[#FFC94D] to-[#FFB74D]",  // Amber gradient (now second)
+  "bg-gradient-to-r from-[#FF6B6B] via-[#FF6B6B] to-[#FF5252]"   // Coral gradient (now third)
+];
+
+const headlineActions = [
+  () => {
+    const waitlistSection = document.getElementById('waitlist-cards');
+    if (waitlistSection) {
+      const facesCard = waitlistSection.querySelector('[data-card="faces"]');
+      if (facesCard) {
+        facesCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
+    }
+  },
+  () => {
+    const waitlistSection = document.getElementById('waitlist-cards');
+    if (waitlistSection) {
+      const brandsCard = waitlistSection.querySelector('[data-card="brands"]');
+      if (brandsCard) {
+        brandsCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
+    }
+  },
+  () => {
+    const waitlistSection = document.getElementById('waitlist-cards');
+    if (waitlistSection) {
+      const creatorCard = waitlistSection.querySelector('[data-card="creator"]');
+      if (creatorCard) {
+        creatorCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
+    }
+  }
 ];
 
 export const RotatingHeadline = () => {
+  const navigate = useNavigate();
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isVisible, setIsVisible] = useState(true);
-  const [displayText, setDisplayText] = useState(headlines[0]);
+
+  const handleHeadlineClick = () => {
+    headlineActions[currentIndex]();
+  };
 
   useEffect(() => {
     // Check for reduced motion preference
@@ -30,28 +65,27 @@ export const RotatingHeadline = () => {
       setIsVisible(false);
       
       setTimeout(() => {
-        const nextIndex = (currentIndex + 1) % headlines.length;
-        setDisplayText(headlines[nextIndex]);
-        setCurrentIndex(nextIndex);
+        setCurrentIndex((prevIndex) => (prevIndex + 1) % headlines.length);
         setIsVisible(true);
-      }, 400); // Slightly longer fade out time
-    }, 3500); // 3.5 seconds display time
+      }, 300); // Half of transition duration
+    }, 4500); // 4.5 seconds display time (1 second longer)
 
     return () => clearInterval(interval);
-  }, [currentIndex]);
+  }, []);
 
   return (
     <div className="box-border caret-transparent outline-[oklab(0.839909_-0.141908_-0.0158958_/_0.5)] text-center mb-8">
-      <h1 
-        className={`text-2xl font-bold box-border caret-transparent leading-8 outline-[oklab(0.839909_-0.141908_-0.0158958_/_0.5)] max-w-4xl mx-auto px-4 bg-clip-text text-transparent transition-opacity duration-500 ease-in-out md:text-3xl md:leading-10 motion-reduce:transition-none ${gradients[currentIndex]} ${isVisible ? 'opacity-100' : 'opacity-0'}`}
+      <button
+        onClick={handleHeadlineClick}
+        className={`text-2xl font-bold box-border caret-transparent leading-8 outline-[oklab(0.839909_-0.141908_-0.0158958_/_0.5)] max-w-4xl mx-auto px-4 bg-clip-text text-transparent transition-all duration-600 ease-in-out md:text-3xl md:leading-10 motion-reduce:transition-none hover:scale-105 active:scale-95 cursor-pointer ${gradients[currentIndex]} ${isVisible ? 'opacity-100' : 'opacity-0'}`}
         style={{
           backgroundClip: 'text',
           WebkitBackgroundClip: 'text',
           WebkitTextFillColor: 'transparent'
         }}
       >
-        {displayText}
-      </h1>
+        {headlines[currentIndex]}
+      </button>
     </div>
   );
 };

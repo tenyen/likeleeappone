@@ -4,9 +4,10 @@ import { useNavigate } from "react-router-dom";
 export const WaitlistCards = () => {
   const navigate = useNavigate();
   return (
-    <div className="box-border caret-transparent gap-x-6 grid grid-cols-none outline-[oklab(0.839909_-0.141908_-0.0158958_/_0.5)] gap-y-6 mb-8 md:grid-cols-[repeat(3,minmax(0px,1fr))]">
-      <WaitlistCard
-        cardVariant="bg-white border-zinc-900/10"
+    <div id="waitlist-cards" className="box-border caret-transparent gap-x-6 grid grid-cols-none outline-[oklab(0.839909_-0.141908_-0.0158958_/_0.5)] gap-y-6 mb-8 md:grid-cols-[repeat(3,minmax(0px,1fr))]">
+      <div data-card="faces">
+        <WaitlistCard
+        cardVariant="bg-white"
         iconSrc="https://c.animaapp.com/mg05rtqgllY9ko/assets/icon-5.svg"
         iconVariant="bg-[oklab(0.839909_-0.141908_-0.0158958_/_0.1)]"
         title="Faces Waitlist"
@@ -27,41 +28,45 @@ export const WaitlistCards = () => {
         footerVariant="border-zinc-900/10"
         showTopIcon={false}
         onClick={() => navigate('/faces-waitlist')}
-      />
-      <WaitlistCard
-        cardVariant="bg-white border-zinc-900/10"
+        />
+      </div>
+      <div data-card="creator">
+        <WaitlistCard
+        cardVariant="bg-white"
         iconSrc="https://c.animaapp.com/mg05rtqgllY9ko/assets/icon-10.svg"
         iconVariant="bg-[oklab(0.890537_0.003488_0.133287_/_0.1)]"
-        title="Protect My Likeness"
-        subtitle="For rights protection"
-        description="Claim your likeness and ensure it cannot be used without permission. Control without licensing — just protection."
+        title="Creator Waitlist"
+        subtitle="For AI artists, filmmakers, and creative technologists"
+        description="Showcase your talent and connect with studios seeking next-generation creators for AI-driven campaigns and films."
         features={[
-          "Secure Your Digital Identity",
-          "Receive Verified Ownership Log",
-          "Track potential misuse",
-          "Peace of mind in AI era",
-          "Control without licensing",
-          "Forever free protection",
+          "Build your professional portfolio",
+          "Connect with production studios",
+          "Access exclusive film projects",
+          "Get hired for paid collaborations",
+          "Collaborate with top AI tools",
+          "Grow your reputation in AI film",
         ]}
         featureIconVariant="bg-orange-300"
         badgeIconSrc=""
         badgeText=""
-        priceText="Free protection"
+        priceText="Early access"
         footerVariant="border-[oklab(0.890537_0.003488_0.133287_/_0.1)]"
         showTopIcon={false}
-        onClick={() => navigate('/protection-waitlist')}
-      />
-      <WaitlistCard
-        cardVariant="bg-white border-zinc-900/10"
+        onClick={() => navigate('/creator-waitlist')}
+        />
+      </div>
+      <div data-card="brands">
+        <WaitlistCard
+        cardVariant="bg-white"
         iconSrc="https://c.animaapp.com/mg05rtqgllY9ko/assets/icon-8.svg"
         iconVariant="bg-[oklab(0.711593_0.167053_0.0703646_/_0.1)]"
-        title="Creator Waitlist"
+        title="Brands & Studios"
         subtitle="For directors & brands"
         description="Find and license authentic faces for your creative projects. Access diverse talent from our community."
         features={[
           "Browse diverse talent pool",
           "Speedrun high-touch campaigns",
-          "Build your portfolio & get clients",
+          "Find AI Professionals",
           "Secure licensing agreements",
           "Project management tools",
           "Rights protection & compliance",
@@ -72,8 +77,9 @@ export const WaitlistCards = () => {
         priceText="Early access"
         footerVariant="border-[oklab(0.711593_0.167053_0.0703646_/_0.1)]"
         showTopIcon={false}
-        onClick={() => navigate('/creator-waitlist')}
-      />
+        onClick={() => navigate('/brands-studios-waitlist')}
+        />
+      </div>
     </div>
   );
 };

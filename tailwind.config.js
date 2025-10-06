@@ -90,8 +90,20 @@ module.exports = {
           "100%": { transform: "translateX(-33.333%)" },
         },
         "fade-in": {
-          "0%": { opacity: "0", transform: "scale(0.95)" },
-          "100%": { opacity: "1", transform: "scale(1)" },
+          "0%": { opacity: "0" },
+          "100%": { opacity: "1" },
+        },
+        "scan-vertical": {
+          "0%": { transform: "translateY(-100%)" },
+          "100%": { transform: "translateY(400%)" },
+        },
+        "scan-horizontal": {
+          "0%": { transform: "translateX(-100%)" },
+          "100%": { transform: "translateX(400%)" },
+        },
+        "materialize": {
+          "0%": { opacity: "0", transform: "translateY(4px)" },
+          "100%": { opacity: "1", transform: "translateY(0)" },
         },
       },
       animation: {
@@ -101,6 +113,9 @@ module.exports = {
         "scroll-fast": "scroll-fast 15s linear infinite",
         "scroll-slower": "scroll-slower 16s linear infinite",
         "fade-in": "fade-in 0.2s ease-out",
+        "scan-vertical": "scan-vertical 3s ease-in-out infinite",
+        "scan-horizontal": "scan-horizontal 4s ease-in-out infinite",
+        "materialize": "materialize 0.6s ease-out forwards",
       },
       transitionDuration: {
         '600': '600ms',

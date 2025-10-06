@@ -1,9 +1,23 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { MainContent } from "@/sections/MainContent";
+import { Faces } from "@/pages/Faces";
+import { BrandsStudios } from "@/pages/BrandsStudios";
+import { AICreators } from "@/pages/AICreators";
+import { Impact } from "@/pages/Impact";
+import { BrowseFaces } from "@/pages/BrowseFaces";
 import { FacesWaitlist } from "@/pages/FacesWaitlist";
 import { CreatorWaitlist } from "@/pages/CreatorWaitlist";
-import { ProtectionWaitlist } from "@/pages/ProtectionWaitlist";
+import { BrandsStudiosWaitlist } from "@/pages/BrandsStudiosWaitlist";
 import { PrivacyPolicy } from "@/pages/PrivacyPolicy";
+import { Blog } from "@/pages/Blog";
+import { ThankYou } from "@/pages/ThankYou";
+import { SignUp } from "@/pages/SignUp";
+import { CreatorSignUp } from "@/pages/CreatorSignUp";
+import { BrandsStudiosSignUp } from "@/pages/BrandsStudiosSignUp";
+import { HowItWorks } from "@/pages/HowItWorks";
+import { ForYou } from "@/pages/ForYou";
+import { ForYou2 } from "@/pages/ForYou2";
+import { ForYou3 } from "@/pages/ForYou3";
 
 export const App = () => {
   return (
@@ -13,10 +27,24 @@ export const App = () => {
           <div className="box-border caret-transparent h-[952px] outline-[oklab(0.839909_-0.141908_-0.0158958_/_0.5)]">
             <Routes>
               <Route path="/" element={<MainContent />} />
+              <Route path="/faces" element={<Faces />} />
+              <Route path="/brands-studios" element={<BrandsStudios />} />
+              <Route path="/ai-creators" element={<AICreators />} />
+              <Route path="/impact" element={<Impact />} />
+              <Route path="/browse-faces" element={<BrowseFaces />} />
               <Route path="/faces-waitlist" element={<FacesWaitlist />} />
               <Route path="/creator-waitlist" element={<CreatorWaitlist />} />
-              <Route path="/protection-waitlist" element={<ProtectionWaitlist />} />
+              <Route path="/brands-studios-waitlist" element={<BrandsStudiosWaitlist />} />
               <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+              <Route path="/blog" element={<Blog />} />
+              <Route path="/thank-you" element={<ThankYou />} />
+              <Route path="/sign-up" element={<SignUp />} />
+              <Route path="/creator-sign-up" element={<CreatorSignUp />} />
+              <Route path="/brands-studios-sign-up" element={<BrandsStudiosSignUp />} />
+              <Route path="/how-it-works" element={<HowItWorks />} />
+              <Route path="/for-you" element={<ForYou />} />
+              <Route path="/for-you-brands" element={<ForYou2 />} />
+              <Route path="/for-you-faces" element={<ForYou3 />} />
             </Routes>
           </div>
         </div>
