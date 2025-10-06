@@ -41,7 +41,10 @@ export const Faces = () => {
                   </div>
 
                   <h1 className="text-5xl md:text-6xl font-bold mb-8 leading-tight">
-                    Your Face, Your Rules, Your Revenue
+                    Your Face, Your Rules
+							
+									
+		  
                   </h1>
                   
                   <p className="text-xl md:text-2xl text-gray-700 mb-12">
@@ -90,11 +93,11 @@ export const Faces = () => {
                   {/* Stats Grid */}
                   <div className="grid grid-cols-2 gap-4 mb-6">
                     <div className="bg-blue-50 border-2 border-blue-200 p-4">
-                      <div className="text-3xl font-bold text-blue-600 mb-1">$1,524.50</div>
+                      <div className="text-2xl font-bold text-blue-600 mb-1">$1,524</div>
                       <div className="text-sm text-gray-600">Royalties Earned</div>
                     </div>
                     <div className="bg-green-50 border-2 border-green-200 p-4">
-                      <div className="text-3xl font-bold text-green-600 mb-1">14</div>
+                      <div className="text-2xl font-bold text-green-600 mb-1">14</div>
                       <div className="text-sm text-gray-600">Usage Requests</div>
                     </div>
                   </div>
