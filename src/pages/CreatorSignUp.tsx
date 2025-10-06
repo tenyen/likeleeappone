@@ -491,13 +491,7 @@ export const CreatorSignUp = () => {
                 </div>
 
                 {/* Form Steps */}
-                <form 
-                  onSubmit={handleSubmit} 
-                  action="https://formspree.io/f/YOUR_FORM_ID" // REPLACE with your Formspree endpoint
-                  method="POST"
-                  encType="multipart/form-data"
-                  className="box-border caret-transparent outline-[oklab(0.839909_-0.141908_-0.0158958_/_0.5)]"
-                >
+                <form onSubmit={handleSubmit} className="box-border caret-transparent outline-[oklab(0.839909_-0.141908_-0.0158958_/_0.5)]">
                   {renderStep()}
                 </form>
               </div>

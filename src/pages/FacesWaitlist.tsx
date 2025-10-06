@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Footer } from "@/sections/Footer";
+import { db } from "@/firebase"; // Import Firebase services
+import { collection, addDoc } from "firebase/firestore";
 
 export const FacesWaitlist = () => {
   const navigate = useNavigate();
@@ -25,39 +27,23 @@ export const FacesWaitlist = () => {
     e.preventDefault();
     
     try {
-      const response = await fetch('https://formspree.io/f/mjkagdbk', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          firstName: formData.firstName,
-          lastName: formData.lastName,
-          email: formData.email,
-          phone: formData.phone,
-          waitlistType: 'Faces Waitlist',
-          motivation1: formData.motivation1,
-          motivation2: formData.motivation2
-        })
+      await addDoc(collection(db, "facesWaitlist"), { // Store in a new collection for waitlist
+        firstName: formData.firstName,
+        lastName: formData.lastName,
+        email: formData.email,
+        phone: formData.phone,
+        waitlistType: 'Faces Waitlist',
+        motivation1: formData.motivation1,
+        motivation2: formData.motivation2,
+        createdAt: new Date(),
       });
 
-      if (response.ok) {
-        navigate('/thank-you'); // Redirect to ThankYou page
-      } else {
-        throw new Error('Failed to submit');
-      }
-      // Reset form regardless of success, or only on success if preferred
-      setFormData({
-        firstName: "",
-        lastName: "",
-        email: "",
-        phone: "",
-        motivation1: "",
-        motivation2: ""
-      });
+      console.log("Faces Waitlist submitted successfully to Firebase:", formData);
+      navigate('/thank-you'); // Redirect to ThankYou page
+
     } catch (error) {
-      console.error('Error:', error);
-      alert('Something went wrong. Please try again or contact us directly.');
+      console.error('Firebase submission error:', error);
+      alert('Something went wrong with your submission. Please try again or contact us directly.');
     }
   };
 

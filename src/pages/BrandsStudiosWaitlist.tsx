@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Footer } from "@/sections/Footer";
+import { db } from "@/firebase"; // Import Firebase services
+import { collection, addDoc } from "firebase/firestore";
 
 export const BrandsStudiosWaitlist = () => {
   const navigate = useNavigate();
@@ -25,39 +27,23 @@ export const BrandsStudiosWaitlist = () => {
     e.preventDefault();
     
     try {
-      const response = await fetch('https://formspree.io/f/mjkagdbk', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          firstName: formData.firstName,
-          lastName: formData.lastName,
-          email: formData.email,
-          phone: formData.phone,
-          waitlistType: 'Brands & Studios Waitlist',
-          projectTypes: formData.projectTypes,
-          frustration: formData.frustration
-        })
+      await addDoc(collection(db, "brandsStudiosWaitlist"), { // Store in a new collection for waitlist
+        firstName: formData.firstName,
+        lastName: formData.lastName,
+        email: formData.email,
+        phone: formData.phone,
+        waitlistType: 'Brands & Studios Waitlist',
+        projectTypes: formData.projectTypes,
+        frustration: formData.frustration,
+        createdAt: new Date(),
       });
 
-      if (response.ok) {
-        navigate('/thank-you'); // Redirect to ThankYou page
-      } else {
-        throw new Error('Failed to submit');
-      }
-      // Reset form regardless of success, or only on success if preferred
-      setFormData({
-        firstName: "",
-        lastName: "",
-        email: "",
-        phone: "",
-        projectTypes: "",
-        frustration: ""
-      });
+      console.log("Brands & Studios Waitlist submitted successfully to Firebase:", formData);
+      navigate('/thank-you'); // Redirect to ThankYou page
+
     } catch (error) {
-      console.error('Error:', error);
-      alert('Something went wrong. Please try again or contact us directly.');
+      console.error('Firebase submission error:', error);
+      alert('Something went wrong with your submission. Please try again or contact us directly.');
     }
   };
 
@@ -247,9 +233,9 @@ export const BrandsStudiosWaitlist = () => {
 
                     <button
                       type="submit"
-                      className="text-sm font-medium items-center bg-red-400 caret-transparent gap-x-2 inline-flex shrink-0 h-10 justify-center leading-5 outline-[oklab(0.839909_-0.141908_-0.0158958_/_0.5)] gap-y-2 text-nowrap w-full px-4 py-0 border-2 border-black hover:bg-red-500 transition-colors"
+                      className="text-sm font-medium items-center bg-orange-300 caret-transparent gap-x-2 inline-flex shrink-0 h-10 justify-center leading-5 outline-[oklab(0.839909_-0.141908_-0.0158958_/_0.5)] gap-y-2 text-nowrap w-full px-4 py-0 border-2 border-black hover:bg-orange-400 transition-colors"
                     >
-                      Join Brands & Studios Waitlist
+                      Join Creator Waitlist
                       <img
                         src="https://c.animaapp.com/mg05rtqgllY9ko/assets/icon-13.svg"
                         alt="Icon"

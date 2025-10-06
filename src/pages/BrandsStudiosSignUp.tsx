@@ -2,6 +2,9 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Footer } from "@/sections/Footer";
 import { Navbar } from "@/sections/MainContent/components/Navbar";
+import { db } from "@/firebase"; // Import Firebase services
+import { collection, addDoc } from "firebase/firestore";
+// No file uploads for this form, so no need for storage imports
 
 // Define industry options
 const industryOptions = [
@@ -100,33 +103,32 @@ export const BrandsStudiosSignUp = () => {
       alert("Passwords do not match!");
       return;
     }
-    
-    const formElement = e.target as HTMLFormElement;
-    const data = new FormData(formElement);
-
-    // Append multi-select data
-    formData.selectedProjectTypes.forEach(type => data.append('selectedProjectTypes[]', type));
 
     try {
-      const response = await fetch(formElement.action, {
-        method: formElement.method,
-        body: data,
-        headers: {
-          'Accept': 'application/json'
-        }
+      await addDoc(collection(db, "brandStudioProfiles"), {
+        companyName: formData.companyName,
+        firstName: formData.firstName,
+        lastName: formData.lastName,
+        email: formData.email,
+        phone: formData.phone,
+        website: formData.website,
+        selectedIndustry: formData.selectedIndustry,
+        otherIndustry: formData.otherIndustry,
+        selectedProjectTypes: formData.selectedProjectTypes,
+        otherProjectType: formData.otherProjectType,
+        teamSize: formData.teamSize,
+        monthlyBudget: formData.monthlyBudget,
+        specificNeeds: formData.specificNeeds,
+        // password: formData.password, // Omit storing password directly
+        createdAt: new Date(),
       });
 
-      if (response.ok) {
-        console.log("Form submitted successfully to Formspree:", formData);
-        navigate('/thank-you');
-      } else {
-        const errorData = await response.json();
-        console.error("Formspree submission error:", errorData);
-        alert('Something went wrong with your submission. Please try again.');
-      }
+      console.log("Brand/Studio profile submitted successfully to Firebase:", formData);
+      navigate('/thank-you');
+
     } catch (error) {
-      console.error("Network error during Formspree submission:", error);
-      alert('Network error. Please check your connection and try again.');
+      console.error("Firebase submission error:", error);
+      alert('Something went wrong with your submission. Please try again.');
     }
   };
 
@@ -466,13 +468,7 @@ export const BrandsStudiosSignUp = () => {
                 </div>
 
                 {/* Form Steps */}
-                <form 
-                  onSubmit={handleSubmit} 
-                  action="https://formspree.io/f/YOUR_FORM_ID" // REPLACE with your Formspree endpoint
-                  method="POST"
-                  encType="multipart/form-data"
-                  className="box-border caret-transparent outline-[oklab(0.839909_-0.141908_-0.0158958_/_0.5)]"
-                >
+                <form onSubmit={handleSubmit} className="box-border caret-transparent outline-[oklab(0.839909_-0.141908_-0.0158958_/_0.5)]">
                   {renderStep()}
                 </form>
               </div>

@@ -542,9 +542,9 @@ export const BrandsStudios = () => {
                       </svg>
                     </div>
                   </div>
-                  <h3 className="text-2xl font-bold mb-4">10,000+ Verified Faces</h3>
+                  <h3 className="text-2xl font-bold mb-4">Access Verified Faces</h3>
                   <p className="text-gray-600 text-lg">
-                    Access the largest database of verified, legally-cleared likenesses.
+                    Access a diverse database of verified, legally-cleared likenesses.
                   </p>
                 </div>
 
