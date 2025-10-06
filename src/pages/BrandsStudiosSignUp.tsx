@@ -44,7 +44,7 @@ export const BrandsStudiosSignUp = () => {
     selectedProjectTypes: [] as string[],
     otherProjectType: "",
     teamSize: "",
-    monthlyBudget: "",
+    campaignScale: [] as string[], // New field for campaign scale
     specificNeeds: "",
     password: "",
     confirmPassword: ""
@@ -329,23 +329,35 @@ export const BrandsStudiosSignUp = () => {
           <div className="bg-white border-2 border-black p-8 relative shadow-lg">
             <h2 className="text-3xl font-bold text-center mb-8">Step 3: Project Needs</h2>
             
-            {/* Monthly Budget */}
+            {/* Campaign Scale */}
             <div className="mb-6">
-              <label className="text-sm font-medium block mb-2">Estimated Monthly Budget for Talent Licensing</label>
-              <select
-                name="monthlyBudget"
-                value={formData.monthlyBudget}
-                onChange={handleInputChange}
-                className="text-base bg-stone-50 border-2 border-black px-3 py-2 w-full"
-              >
-                <option value="">Select budget range (optional)</option>
-                <option value="under-5k">Under $5,000</option>
-                <option value="5k-10k">$5,000 - $10,000</option>
-                <option value="10k-25k">$10,000 - $25,000</option>
-                <option value="25k-50k">$25,000 - $50,000</option>
-                <option value="50k-100k">$50,000 - $100,000</option>
-                <option value="100k+">$100,000+</option>
-              </select>
+              <label className="text-sm font-medium block mb-2">What scale of campaigns are you planning?</label>
+              <div className="space-y-2">
+                {['Social ads', 'Brand commercials', 'Film / TV', 'AI training / R&D'].map((option) => (
+                  <div key={option} className="flex items-center">
+                    <input
+                      type="checkbox"
+                      id={`campaign-${option.replace(/\s|\//g, '-')}`}
+                      name="campaignScale"
+                      value={option}
+                      checked={formData.campaignScale.includes(option)}
+                      onChange={(e) => {
+                        const { value, checked } = e.target;
+                        setFormData((prev) => ({
+                          ...prev,
+                          campaignScale: checked
+                            ? [...prev.campaignScale, value]
+                            : prev.campaignScale.filter((item) => item !== value),
+                        }));
+                      }}
+                      className="h-4 w-4 text-yellow-400 border-2 border-black focus:ring-yellow-500"
+                    />
+                    <label htmlFor={`campaign-${option.replace(/\s|\//g, '-')}`} className="ml-2 text-sm text-gray-700">
+                      {option}
+                    </label>
+                  </div>
+                ))}
+              </div>
             </div>
 
             {/* Specific Needs */}
