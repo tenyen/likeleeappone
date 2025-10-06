@@ -80,7 +80,7 @@ export const Faces = () => {
                       className="w-24 h-24 object-cover border-2 border-black"
                     />
                     <div className="flex-1">
-                      <h3 className="text-2xl font-bold mb-1">Ayanna Okafor-McKenzie</h3>
+                      <h3 className="text-2xl font-bold mb-1">Ayanna Okafor</h3>
                       <p className="text-lg text-gray-700 mb-1">Verified Face </p>
                       <p className="text-gray-600">Marietta, Ga</p>
                     </div>
