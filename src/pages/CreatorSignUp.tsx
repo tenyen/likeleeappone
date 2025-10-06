@@ -2,6 +2,9 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Footer } from "@/sections/Footer";
 import { Navbar } from "@/sections/MainContent/components/Navbar";
+import { db, storage } from "@/firebase"; // Import Firebase services
+import { collection, addDoc } from "firebase/firestore";
+import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 
 // Define creator content type options
 const creatorContentTypeOptions = [
@@ -125,29 +128,39 @@ export const CreatorSignUp = () => {
       alert("Passwords do not match!");
       return;
     }
-    
-    console.log("Final Creator Sign-up data:", formData);
-    navigate('/thank-you');
-    
-    // Reset form
-    setFormData({
-      firstName: "",
-      lastName: "",
-      email: "",
-      selectedCreatorContentTypes: [],
-      otherCreatorContentType: "",
-      selectedAITools: [],
-      otherAITool: "",
-      location: "",
-      yearsExperience: "",
-      portfolioLink: "",
-      socialMediaLink: "",
-      profilePhoto: null,
-      password: "",
-      confirmPassword: ""
-    });
-    setShowOtherCreatorContentTypeInput(false);
-    setShowOtherAIToolInput(false);
+
+    try {
+      let photoURL = '';
+      if (formData.profilePhoto) {
+        const storageRef = ref(storage, `creator_profiles/${formData.email}/${formData.profilePhoto.name}`);
+        const snapshot = await uploadBytes(storageRef, formData.profilePhoto);
+        photoURL = await getDownloadURL(snapshot.ref);
+      }
+
+      await addDoc(collection(db, "creatorProfiles"), {
+        firstName: formData.firstName,
+        lastName: formData.lastName,
+        email: formData.email,
+        selectedCreatorContentTypes: formData.selectedCreatorContentTypes,
+        otherCreatorContentType: formData.otherCreatorContentType,
+        selectedAITools: formData.selectedAITools,
+        otherAITool: formData.otherAITool,
+        location: formData.location,
+        yearsExperience: formData.yearsExperience,
+        portfolioLink: formData.portfolioLink,
+        socialMediaLink: formData.socialMediaLink,
+        profilePhotoURL: photoURL, // Store the URL of the uploaded photo
+        // password: formData.password, // Omit storing password directly
+        createdAt: new Date(),
+      });
+
+      console.log("Creator profile submitted successfully to Firebase:", formData);
+      navigate('/thank-you');
+
+    } catch (error) {
+      console.error("Firebase submission error:", error);
+      alert('Something went wrong with your submission. Please try again.');
+    }
   };
 
   const renderStep = () => {

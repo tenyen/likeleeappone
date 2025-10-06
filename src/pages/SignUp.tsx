@@ -1,7 +1,10 @@
-import { useState, useEffect, useRef } from "react"; // Import useRef
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Footer } from "@/sections/Footer";
 import { Navbar } from "@/sections/MainContent/components/Navbar";
+import { db, storage } from "@/firebase"; // Import Firebase services
+import { collection, addDoc } from "firebase/firestore";
+import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 
 // Define content type options
 const contentTypeOptions = [
@@ -53,7 +56,7 @@ export const SignUp = () => {
     heightRange: "",
     vibeTags: [] as string[],
     ethnicity: "",
-    profileVisibility: "private", // Changed from nameVisibility to profileVisibility, default to private
+    profileVisibility: "private",
     profilePhoto: null as File | null,
     password: "",
     confirmPassword: ""
@@ -62,7 +65,6 @@ export const SignUp = () => {
   const [showAllContentTypes, setShowAllContentTypes] = useState(false);
   const [showOtherContentTypeInput, setShowOtherContentTypeInput] = useState(false);
   const [showAllIndustries, setShowAllIndustries] = useState(false);
-  // Removed useRef hooks as they are no longer needed for single file upload
 
   useEffect(() => {
     setShowOtherContentTypeInput(formData.selectedContentTypes.includes("other_content"));
@@ -122,8 +124,13 @@ export const SignUp = () => {
         alert("Please fill in all required fields for basic info.");
         return;
       }
+    } else if (currentStep === 3) { // Added validation for birthdate
+      if (!formData.birthdate) {
+        alert("Please enter your birthdate.");
+        return;
+      }
     } else if (currentStep === 4) {
-      if (!formData.profilePhoto) { // Ensure a single photo is uploaded
+      if (!formData.profilePhoto) {
         alert("Please upload a profile photo.");
         return;
       }
@@ -141,38 +148,46 @@ export const SignUp = () => {
       alert("Passwords do not match!");
       return;
     }
-    
-    const formElement = e.target as HTMLFormElement;
-    const data = new FormData(formElement);
-
-    // Append multi-select data
-    formData.selectedContentTypes.forEach(type => data.append('selectedContentTypes[]', type));
-    formData.selectedIndustries.forEach(industry => data.append('selectedIndustries[]', industry));
-    formData.vibeTags.forEach(tag => data.append('vibeTags[]', tag));
-
-    // Handle file upload separately if needed, or ensure Formspree handles it via FormData
-    // For Formspree, if the input type="file" has a name, it will be included in FormData automatically.
 
     try {
-      const response = await fetch(formElement.action, {
-        method: formElement.method,
-        body: data,
-        headers: {
-          'Accept': 'application/json'
-        }
+      let photoURL = '';
+      if (formData.profilePhoto) {
+        const storageRef = ref(storage, `faces_profiles/${formData.email}/${formData.profilePhoto.name}`);
+        const snapshot = await uploadBytes(storageRef, formData.profilePhoto);
+        photoURL = await getDownloadURL(snapshot.ref);
+      }
+
+      await addDoc(collection(db, "facesProfiles"), {
+        firstName: formData.firstName,
+        lastName: formData.lastName,
+        email: formData.email,
+        selectedContentTypes: formData.selectedContentTypes,
+        otherContentType: formData.otherContentType,
+        selectedIndustries: formData.selectedIndustries,
+        location: formData.location,
+        birthdate: formData.birthdate,
+        genderExpression: formData.genderExpression,
+        pronouns: formData.pronouns,
+        hairColor: formData.hairColor,
+        eyeColor: formData.eyeColor,
+        skinTone: formData.skinTone,
+        heightRange: formData.heightRange,
+        vibeTags: formData.vibeTags,
+        ethnicity: formData.ethnicity,
+        profileVisibility: formData.profileVisibility,
+        profilePhotoURL: photoURL, // Store the URL of the uploaded photo
+        // Passwords should ideally be handled by a secure authentication system, not stored directly in Firestore.
+        // For this exercise, we'll omit storing it directly.
+        // password: formData.password, 
+        createdAt: new Date(),
       });
 
-      if (response.ok) {
-        console.log("Form submitted successfully to Formspree:", formData);
-        navigate('/thank-you');
-      } else {
-        const errorData = await response.json();
-        console.error("Formspree submission error:", errorData);
-        alert('Something went wrong with your submission. Please try again.');
-      }
+      console.log("Faces profile submitted successfully to Firebase:", formData);
+      navigate('/thank-you');
+
     } catch (error) {
-      console.error("Network error during Formspree submission:", error);
-      alert('Network error. Please check your connection and try again.');
+      console.error("Firebase submission error:", error);
+      alert('Something went wrong with your submission. Please try again.');
     }
   };
 
