@@ -7,12 +7,12 @@ export const AICreators = () => {
 
   return (
     <div className="fixed box-border caret-transparent h-[952px] outline-[oklab(0.839909_-0.141908_-0.0158958_/_0.5)] overflow-auto inset-0">
-      <div className="relative box-border caret-transparent basis-0 grow shrink-0 h-[952px] min-h-px min-w-px outline-[oklab(0.839909_-0.141908_-0.0158958_/_0.5)] w-full">
-        <div className="bg-white box-border caret-transparent min-h-[952px] outline-[oklab(0.839909_-0.141908_-0.0158958_/_0.5)]">
+      <div className="relative box-border caret-transparent basis-0 grow shrink-0 min-h-screen min-w-px outline-[oklab(0.839909_-0.141908_-0.0158958_/_0.5)] w-full bg-gradient-to-br from-[#F4FDFD] via-[#F8EDE6] to-[#FFFCF5]">
+        <div className="box-border caret-transparent min-h-screen outline-[oklab(0.839909_-0.141908_-0.0158958_/_0.5)]">
           <Navbar />
           
           {/* Hero Section */}
-          <section className="bg-gradient-to-br from-[#F4FDFD] via-[#F8EDE6] to-[#FFFCF5] box-border caret-transparent outline-[oklab(0.839909_-0.141908_-0.0158958_/_0.5)] py-24 md:py-32">
+          <section className="box-border caret-transparent outline-[oklab(0.839909_-0.141908_-0.0158958_/_0.5)] py-24 md:py-32">
             <div className="max-w-7xl mx-auto px-4">
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
                 {/* Left Side - Text Content */}
@@ -94,7 +94,7 @@ export const AICreators = () => {
           </section>
 
           {/* Your Gateway to AI Film Industry */}
-          <section className="bg-white py-24 md:py-32">
+          <section className="py-24 md:py-32">
             <div className="max-w-7xl mx-auto px-4">
               <div className="text-center mb-16">
                 <h2 className="text-4xl md:text-5xl font-bold mb-6">
@@ -149,7 +149,7 @@ export const AICreators = () => {
           </section>
 
           {/* Meet Our AI Filmmakers */}
-          <section id="meet-filmmakers" className="bg-gradient-to-br from-[#F4FDFD] via-[#F8EDE6] to-[#FFFCF5] py-24 md:py-32">
+          <section id="meet-filmmakers" className="py-24 md:py-32">
             <div className="max-w-7xl mx-auto px-4">
               <div className="text-center mb-16">
                 <h2 className="text-4xl md:text-5xl font-bold mb-6">
@@ -305,7 +305,7 @@ export const AICreators = () => {
           </section>
 
           {/* How It Works */}
-          <section className="bg-white py-24 md:py-32">
+          <section className="py-24 md:py-32">
             <div className="max-w-7xl mx-auto px-4">
               <div className="text-center mb-16">
                 <h2 className="text-4xl md:text-5xl font-bold mb-6">

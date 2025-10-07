@@ -389,12 +389,12 @@ export const BrandsStudios = () => {
 
   return (
     <div className="fixed box-border caret-transparent h-[952px] outline-[oklab(0.839909_-0.141908_-0.0158958_/_0.5)] overflow-auto inset-0">
-      <div className="relative box-border caret-transparent basis-0 grow shrink-0 h-[952px] min-h-px min-w-px outline-[oklab(0.839909_-0.141908_-0.0158958_/_0.5)] w-full">
-        <div className="bg-white box-border caret-transparent min-h-[952px] outline-[oklab(0.839909_-0.141908_-0.0158958_/_0.5)]">
+      <div className="relative box-border caret-transparent basis-0 grow shrink-0 min-h-screen min-w-px outline-[oklab(0.839909_-0.141908_-0.0158958_/_0.5)] w-full bg-gradient-to-br from-[#F4FDFD] via-[#F8EDE6] to-[#FFFCF5]">
+        <div className="box-border caret-transparent min-h-screen outline-[oklab(0.839909_-0.141908_-0.0158958_/_0.5)]">
           <Navbar />
           
           {/* Hero Section */}
-          <section className="bg-gradient-to-br from-[#F4FDFD] via-[#F8EDE6] to-[#FFFCF5] box-border caret-transparent outline-[oklab(0.839909_-0.141908_-0.0158958_/_0.5)] py-24 md:py-32 relative overflow-hidden">
+          <section className="box-border caret-transparent outline-[oklab(0.839909_-0.141908_-0.0158958_/_0.5)] py-24 md:py-32 relative overflow-hidden">
             {/* Decorative waves */}
             <div className="absolute inset-0 opacity-10">
               <svg className="absolute top-0 left-0 w-full h-full" viewBox="0 0 1440 800" fill="none">
@@ -460,7 +460,7 @@ export const BrandsStudios = () => {
           </section>
 
           {/* Everything You Need for Production Section */}
-          <section className="bg-white py-24 md:py-32">
+          <section className="py-24 md:py-32">
             <div className="max-w-7xl mx-auto px-4">
               <div className="text-center mb-16">
                 <h2 className="text-4xl md:text-5xl font-bold mb-6">
@@ -521,7 +521,7 @@ export const BrandsStudios = () => {
           </section>
 
           {/* Why Studios Choose Likelee Section */}
-          <section className="bg-gradient-to-br from-[#F4FDFD] via-[#F8EDE6] to-[#FFFCF5] py-24 md:py-32">
+          <section className="py-24 md:py-32">
             <div className="max-w-7xl mx-auto px-4">
               <div className="text-center mb-16">
                 <h2 className="text-4xl md:text-5xl font-bold mb-6">
