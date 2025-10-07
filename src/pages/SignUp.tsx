@@ -338,8 +338,9 @@ export const SignUp = () => {
             <div className="mb-4">
               <label className="text-sm font-medium block mb-2">Birthdate *</label>
               <input
-                type="date"
+                type="text" // Changed from "date" to "text"
                 name="birthdate"
+                placeholder="MM/DD/YYYY" // Added placeholder for format guidance
                 value={formData.birthdate}
                 onChange={handleInputChange}
                 required
