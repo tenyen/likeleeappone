@@ -196,6 +196,9 @@ export const SignUp = () => {
   };
 
   const renderStep = () => {
+    const visibleContentTypes = showAllContentTypes ? contentTypeOptions : contentTypeOptions.slice(0, 5);
+    const visibleIndustryOptions = showAllIndustries ? industryOptions : industryOptions.slice(0, 5);
+
     switch (currentStep) {
       case 1:
         return (
