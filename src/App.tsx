@@ -18,6 +18,8 @@ import { HowItWorks } from "@/pages/HowItWorks";
 import { ForYou } from "@/pages/ForYou";
 import { ForYou2 } from "@/pages/ForYou2";
 import { ForYou3 } from "@/pages/ForYou3";
+import { ContactUs } from "@/pages/ContactUs"; // New import
+import { Careers } from "@/pages/Careers";     // New import
 
 export const App = () => {
   return (
@@ -45,6 +47,8 @@ export const App = () => {
               <Route path="/for-you" element={<ForYou />} />
               <Route path="/for-you-brands" element={<ForYou2 />} />
               <Route path="/for-you-faces" element={<ForYou3 />} />
+              <Route path="/contact-us" element={<ContactUs />} /> {/* New route */}
+              <Route path="/careers" element={<Careers />} />       {/* New route */}
             </Routes>
           </div>
         </div>

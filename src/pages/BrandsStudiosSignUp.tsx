@@ -117,7 +117,7 @@ export const BrandsStudiosSignUp = () => {
         selectedProjectTypes: formData.selectedProjectTypes,
         otherProjectType: formData.otherProjectType,
         teamSize: formData.teamSize,
-        campaignScale: formData.campaignScale, // Store the new campaign scale data
+        monthlyBudget: formData.monthlyBudget,
         specificNeeds: formData.specificNeeds,
         // password: formData.password, // Omit storing password directly
         createdAt: new Date(),
@@ -421,7 +421,7 @@ export const BrandsStudiosSignUp = () => {
               </button>
               <button
                 type="submit"
-                className="text-lg font-semibold bg-yellow-400 text-black px-8 py-4 border-2 border-black hover:bg-yellow-500 transition-colors"
+                className="text-lg font-semibold bg-yellow-400 text-black px-8 py-3 border-2 border-black hover:bg-yellow-500 transition-colors"
               >
                 Submit Application
               </button>
@@ -452,7 +452,7 @@ export const BrandsStudiosSignUp = () => {
                     </div>
                     <div className="box-border caret-transparent outline-[oklab(0.839909_-0.141908_-0.0158958_/_0.5)] ml-3">
                       <h1 className="text-3xl font-bold box-border caret-transparent leading-9 outline-[oklab(0.839909_-0.141908_-0.0158958_/_0.5)] md:text-4xl">
-                        Partner Application
+                        Brands & Studios
                       </h1>
                       {currentStep > 0 && (
                         <p className="text-neutral-500 text-lg box-border caret-transparent leading-6 outline-[oklab(0.839909_-0.141908_-0.0158958_/_0.5)]">

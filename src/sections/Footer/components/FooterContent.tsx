@@ -10,12 +10,14 @@ export const FooterContent = () => {
           title="Resources"
           links={[
             { text: "Blog", href: "/blog", isRoute: true },
+            { text: "Careers", href: "/careers", isRoute: true }, // New Careers link
           ]}
         />
         <FooterColumn
           title="Support"
           links={[
             { text: "Privacy Policy", href: "/privacy-policy", isRoute: true },
+            { text: "Contact Us", href: "/contact-us", isRoute: true }, // New Contact Us link
           ]}
         />
       </div>

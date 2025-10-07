@@ -105,6 +105,18 @@ module.exports = {
           "0%": { opacity: "0", transform: "translateY(4px)" },
           "100%": { opacity: "1", transform: "translateY(0)" },
         },
+        "fade-in-up": {
+          "0%": { opacity: "0", transform: "translateY(20px)" },
+          "100%": { opacity: "1", transform: "translateY(0)" },
+        },
+        "float-subtle": {
+          "0%, 100%": { transform: "translateY(0px)" },
+          "50%": { transform: "translateY(-5px)" },
+        },
+        "spin-slow": {
+          from: { transform: "rotate(0deg)" },
+          to: { transform: "rotate(360deg)" },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
@@ -116,6 +128,9 @@ module.exports = {
         "scan-vertical": "scan-vertical 3s ease-in-out infinite",
         "scan-horizontal": "scan-horizontal 4s ease-in-out infinite",
         "materialize": "materialize 0.6s ease-out forwards",
+        "fade-in-up": "fade-in-up 0.6s ease-out forwards",
+        "float-subtle": "float-subtle 4s ease-in-out infinite",
+        "spin-slow": "spin-slow 30s linear infinite",
       },
       transitionDuration: {
         '600': '600ms',
