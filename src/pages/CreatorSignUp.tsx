@@ -2,6 +2,9 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Footer } from "@/sections/Footer";
 import { Navbar } from "@/sections/MainContent/components/Navbar";
+import { db, storage } from "@/firebase"; // Import Firebase services
+import { ref as dbRef, push, serverTimestamp } from "firebase/database"; // Realtime Database imports
+import { ref as storageRef, uploadBytes, getDownloadURL } from "firebase/storage"; // Storage imports
 
 // Define creator content type options
 const creatorContentTypeOptions = [
@@ -125,29 +128,45 @@ export const CreatorSignUp = () => {
       alert("Passwords do not match!");
       return;
     }
-    
-    console.log("Final Creator Sign-up data:", formData);
-    navigate('/thank-you');
-    
-    // Reset form
-    setFormData({
-      firstName: "",
-      lastName: "",
-      email: "",
-      selectedCreatorContentTypes: [],
-      otherCreatorContentType: "",
-      selectedAITools: [],
-      otherAITool: "",
-      location: "",
-      yearsExperience: "",
-      portfolioLink: "",
-      socialMediaLink: "",
-      profilePhoto: null,
-      password: "",
-      confirmPassword: ""
-    });
-    setShowOtherCreatorContentTypeInput(false);
-    setShowOtherAIToolInput(false);
+
+    try {
+      let photoURL = '';
+      if (formData.profilePhoto) {
+        // Upload photo to Firebase Storage
+        const imageRef = storageRef(storage, `creator_profiles/${formData.email}/${formData.profilePhoto.name}`);
+        const snapshot = await uploadBytes(imageRef, formData.profilePhoto);
+        photoURL = await getDownloadURL(snapshot.ref);
+      }
+
+      // Prepare data for Realtime Database
+      const profileData = {
+        firstName: formData.firstName,
+        lastName: formData.lastName,
+        email: formData.email,
+        selectedCreatorContentTypes: formData.selectedCreatorContentTypes,
+        otherCreatorContentType: formData.otherCreatorContentType,
+        selectedAITools: formData.selectedAITools,
+        otherAITool: formData.otherAITool,
+        location: formData.location,
+        yearsExperience: formData.yearsExperience,
+        portfolioLink: formData.portfolioLink,
+        socialMediaLink: formData.socialMediaLink,
+        profilePhotoURL: photoURL, // Store the URL of the uploaded photo
+        // Passwords should ideally be handled by a secure authentication system, not stored directly.
+        createdAt: serverTimestamp(), // Use serverTimestamp for Realtime Database
+      };
+
+      console.log("Data being sent to Realtime Database (Creator):", profileData); // DEBUG LOG
+      // Save profile data to Realtime Database
+      await push(dbRef(db, 'creatorProfiles'), profileData);
+
+      console.log("Creator profile submitted successfully to Firebase Realtime Database:", formData);
+      navigate('/thank-you');
+
+    } catch (error) {
+      console.error("Firebase submission error:", error);
+      alert('Something went wrong with your submission. Please try again.');
+    }
   };
 
   const renderStep = () => {

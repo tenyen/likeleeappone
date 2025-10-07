@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Footer } from "@/sections/Footer";
 import { db } from "@/firebase"; // Import Firebase services
-import { collection, addDoc } from "firebase/firestore";
+import { ref as dbRef, push, serverTimestamp } from "firebase/database"; // Realtime Database imports
 
 export const FacesWaitlist = () => {
   const navigate = useNavigate();
@@ -26,19 +26,22 @@ export const FacesWaitlist = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
-    try {
-      await addDoc(collection(db, "facesWaitlist"), { // Store in a new collection for waitlist
-        firstName: formData.firstName,
-        lastName: formData.lastName,
-        email: formData.email,
-        phone: formData.phone,
-        waitlistType: 'Faces Waitlist',
-        motivation1: formData.motivation1,
-        motivation2: formData.motivation2,
-        createdAt: new Date(),
-      });
+    const waitlistData = {
+      firstName: formData.firstName,
+      lastName: formData.lastName,
+      email: formData.email,
+      phone: formData.phone,
+      waitlistType: 'Faces Waitlist',
+      motivation1: formData.motivation1,
+      motivation2: formData.motivation2,
+      createdAt: serverTimestamp(), // Use serverTimestamp for Realtime Database
+    };
 
-      console.log("Faces Waitlist submitted successfully to Firebase:", formData);
+    console.log("Data being sent to Realtime Database (Faces Waitlist):", waitlistData); // DEBUG LOG
+    try {
+      await push(dbRef(db, 'facesWaitlist'), waitlistData);
+
+      console.log("Faces Waitlist submitted successfully to Firebase Realtime Database:", formData);
       navigate('/thank-you'); // Redirect to ThankYou page
 
     } catch (error) {

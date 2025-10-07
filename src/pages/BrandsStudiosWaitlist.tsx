@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Footer } from "@/sections/Footer";
 import { db } from "@/firebase"; // Import Firebase services
-import { collection, addDoc } from "firebase/firestore";
+import { ref as dbRef, push, serverTimestamp } from "firebase/database"; // Realtime Database imports
 
 export const BrandsStudiosWaitlist = () => {
   const navigate = useNavigate();
@@ -26,19 +26,22 @@ export const BrandsStudiosWaitlist = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
-    try {
-      await addDoc(collection(db, "brandsStudiosWaitlist"), { // Store in a new collection for waitlist
-        firstName: formData.firstName,
-        lastName: formData.lastName,
-        email: formData.email,
-        phone: formData.phone,
-        waitlistType: 'Brands & Studios Waitlist',
-        projectTypes: formData.projectTypes,
-        frustration: formData.frustration,
-        createdAt: new Date(),
-      });
+    const waitlistData = {
+      firstName: formData.firstName,
+      lastName: formData.lastName,
+      email: formData.email,
+      phone: formData.phone,
+      waitlistType: 'Brands & Studios Waitlist',
+      projectTypes: formData.projectTypes,
+      frustration: formData.frustration,
+      createdAt: serverTimestamp(), // Use serverTimestamp for Realtime Database
+    };
 
-      console.log("Brands & Studios Waitlist submitted successfully to Firebase:", formData);
+    console.log("Data being sent to Realtime Database (Brands & Studios Waitlist):", waitlistData); // DEBUG LOG
+    try {
+      await push(dbRef(db, 'brandsStudiosWaitlist'), waitlistData);
+
+      console.log("Brands & Studios Waitlist submitted successfully to Firebase Realtime Database:", formData);
       navigate('/thank-you'); // Redirect to ThankYou page
 
     } catch (error) {
@@ -129,9 +132,7 @@ export const BrandsStudiosWaitlist = () => {
                     {/* Basic Info */}
                     <div className="box-border caret-transparent gap-x-3 grid grid-cols-[repeat(1,minmax(0px,1fr))] outline-[oklab(0.839909_-0.141908_-0.0158958_/_0.5)] gap-y-3 mb-4 md:grid-cols-[repeat(2,minmax(0px,1fr))]">
                       <div className="box-border caret-transparent outline-[oklab(0.839909_-0.141908_-0.0158958_/_0.5)]">
-                        <label className="text-sm font-medium items-center box-border caret-transparent gap-x-2 block leading-5 outline-[oklab(0.839909_-0.141908_-0.0158958_/_0.5)] gap-y-2 mb-2">
-                          First Name *
-                        </label>
+                        <label className="text-sm font-medium block mb-2">First Name *</label>
                         <input
                           type="text"
                           name="firstName"
@@ -139,28 +140,24 @@ export const BrandsStudiosWaitlist = () => {
                           value={formData.firstName}
                           onChange={handleInputChange}
                           required
-                          className="text-base bg-stone-50 box-border caret-transparent flex h-12 leading-6 outline-[oklab(0.839909_-0.141908_-0.0158958_/_0.5)] text-start w-full border-2 border-black px-3 py-1 md:text-sm md:leading-5"
+                          className="text-base bg-stone-50 border-2 border-black px-3 py-2 w-full"
                         />
                       </div>
                       <div className="box-border caret-transparent outline-[oklab(0.839909_-0.141908_-0.0158958_/_0.5)]">
-                        <label className="text-sm font-medium items-center box-border caret-transparent gap-x-2 block leading-5 outline-[oklab(0.839909_-0.141908_-0.0158958_/_0.5)] gap-y-2 mb-2">
-                          Last Name
-                        </label>
+                        <label className="text-sm font-medium block mb-2">Last Name</label>
                         <input
                           type="text"
                           name="lastName"
                           placeholder="Last name (optional)"
                           value={formData.lastName}
                           onChange={handleInputChange}
-                          className="text-base bg-stone-50 box-border caret-transparent flex h-12 leading-6 outline-[oklab(0.839909_-0.141908_-0.0158958_/_0.5)] text-start w-full border-2 border-black px-3 py-1 md:text-sm md:leading-5"
+                          className="text-base bg-stone-50 border-2 border-black px-3 py-2 w-full"
                         />
                       </div>
                     </div>
 
                     <div className="box-border caret-transparent outline-[oklab(0.839909_-0.141908_-0.0158958_/_0.5)] mb-4">
-                      <label className="text-sm font-medium items-center box-border caret-transparent gap-x-2 block leading-5 outline-[oklab(0.839909_-0.141908_-0.0158958_/_0.5)] gap-y-2 mb-2">
-                        Email Address *
-                      </label>
+                      <label className="text-sm font-medium block mb-2">Email Address *</label>
                       <input
                         type="email"
                         name="email"
@@ -168,14 +165,12 @@ export const BrandsStudiosWaitlist = () => {
                         value={formData.email}
                         onChange={handleInputChange}
                         required
-                        className="text-base bg-stone-50 box-border caret-transparent flex h-12 leading-6 outline-[oklab(0.839909_-0.141908_-0.0158958_/_0.5)] text-start w-full border-2 border-black px-3 py-1 md:text-sm md:leading-5"
+                        className="text-base bg-stone-50 border-2 border-black px-3 py-2 w-full"
                       />
                     </div>
 
                     <div className="box-border caret-transparent outline-[oklab(0.839909_-0.141908_-0.0158958_/_0.5)] mb-6">
-                      <label className="text-sm font-medium items-center box-border caret-transparent gap-x-2 block leading-5 outline-[oklab(0.839909_-0.141908_-0.0158958_/_0.5)] gap-y-2 mb-2">
-                        Phone Number *
-                      </label>
+                      <label className="text-sm font-medium block mb-2">Phone Number *</label>
                       <input
                         type="tel"
                         name="phone"
@@ -183,20 +178,18 @@ export const BrandsStudiosWaitlist = () => {
                         value={formData.phone}
                         onChange={handleInputChange}
                         required
-                        className="text-base bg-stone-50 box-border caret-transparent flex h-12 leading-6 outline-[oklab(0.839909_-0.141908_-0.0158958_/_0.5)] text-start w-full border-2 border-black px-3 py-1 md:text-sm md:leading-5"
+                        className="text-base bg-stone-50 border-2 border-black px-3 py-2 w-full"
                       />
                     </div>
 
                     {/* Specific Questions */}
                     <div className="box-border caret-transparent outline-[oklab(0.839909_-0.141908_-0.0158958_/_0.5)] mb-6">
-                      <label className="text-sm font-medium items-center box-border caret-transparent gap-x-2 block leading-5 outline-[oklab(0.839909_-0.141908_-0.0158958_/_0.5)] gap-y-2 mb-2">
-                        What type of projects are you most likely to use likenesses for?
-                      </label>
+                      <label className="text-sm font-medium block mb-2">What type of projects are you most likely to use likenesses for?</label>
                       <select
                         name="projectTypes"
                         value={formData.projectTypes}
                         onChange={handleInputChange}
-                        className="text-base bg-stone-50 box-border caret-transparent flex h-12 leading-6 outline-[oklab(0.839909_-0.141908_-0.0158958_/_0.5)] text-start w-full border-2 border-black px-3 py-1 md:text-sm md:leading-5"
+                        className="text-base bg-stone-50 border-2 border-black px-3 py-2 w-full"
                       >
                         <option value="">Select project type</option>
                         <option value="advertisements">Advertisements</option>
@@ -210,14 +203,12 @@ export const BrandsStudiosWaitlist = () => {
                     </div>
 
                     <div className="box-border caret-transparent outline-[oklab(0.839909_-0.141908_-0.0158958_/_0.5)] mb-6">
-                      <label className="text-sm font-medium items-center box-border caret-transparent gap-x-2 block leading-5 outline-[oklab(0.839909_-0.141908_-0.0158958_/_0.5)] gap-y-2 mb-2">
-                        What's your biggest frustration with current casting or sourcing talent?
-                      </label>
+                      <label className="text-sm font-medium block mb-2">What's your biggest frustration with current casting or sourcing talent?</label>
                       <select
                         name="frustration"
                         value={formData.frustration}
                         onChange={handleInputChange}
-                        className="text-base bg-stone-50 box-border caret-transparent flex h-12 leading-6 outline-[oklab(0.839909_-0.141908_-0.0158958_/_0.5)] text-start w-full border-2 border-black px-3 py-1 md:text-sm md:leading-5"
+                        className="text-base bg-stone-50 border-2 border-black px-3 py-2 w-full"
                       >
                         <option value="">Select your biggest frustration</option>
                         <option value="too-expensive">Too expensive</option>

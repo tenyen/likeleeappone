@@ -3,8 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { Footer } from "@/sections/Footer";
 import { Navbar } from "@/sections/MainContent/components/Navbar";
 import { db } from "@/firebase"; // Import Firebase services
-import { collection, addDoc } from "firebase/firestore";
-// No file uploads for this form, so no need for storage imports
+import { ref as dbRef, push, serverTimestamp } from "firebase/database"; // Realtime Database imports
 
 // Define industry options
 const industryOptions = [
@@ -82,6 +81,15 @@ export const BrandsStudiosSignUp = () => {
     });
   };
 
+  const handleCampaignScaleToggle = (value: string) => {
+    setFormData((prev) => ({
+      ...prev,
+      campaignScale: prev.campaignScale.includes(value)
+        ? prev.campaignScale.filter((item) => item !== value)
+        : [...prev.campaignScale, value],
+    }));
+  };
+
   const handleNext = () => {
     // Basic validation for current step before moving next
     if (currentStep === 1) {
@@ -104,26 +112,29 @@ export const BrandsStudiosSignUp = () => {
       return;
     }
 
-    try {
-      await addDoc(collection(db, "brandStudioProfiles"), {
-        companyName: formData.companyName,
-        firstName: formData.firstName,
-        lastName: formData.lastName,
-        email: formData.email,
-        phone: formData.phone,
-        website: formData.website,
-        selectedIndustry: formData.selectedIndustry,
-        otherIndustry: formData.otherIndustry,
-        selectedProjectTypes: formData.selectedProjectTypes,
-        otherProjectType: formData.otherProjectType,
-        teamSize: formData.teamSize,
-        monthlyBudget: formData.monthlyBudget,
-        specificNeeds: formData.specificNeeds,
-        // password: formData.password, // Omit storing password directly
-        createdAt: new Date(),
-      });
+    const profileData = {
+      companyName: formData.companyName,
+      firstName: formData.firstName,
+      lastName: formData.lastName,
+      email: formData.email,
+      phone: formData.phone,
+      website: formData.website,
+      selectedIndustry: formData.selectedIndustry,
+      otherIndustry: formData.otherIndustry,
+      selectedProjectTypes: formData.selectedProjectTypes,
+      otherProjectType: formData.otherProjectType,
+      teamSize: formData.teamSize,
+      campaignScale: formData.campaignScale,
+      specificNeeds: formData.specificNeeds,
+      // password: formData.password, // Omit storing password directly
+      createdAt: serverTimestamp(), // Use serverTimestamp for Realtime Database
+    };
 
-      console.log("Brand/Studio profile submitted successfully to Firebase:", formData);
+    console.log("Data being sent to Realtime Database (Brands & Studios):", profileData); // DEBUG LOG
+    try {
+      await push(dbRef(db, 'brandStudioProfiles'), profileData);
+
+      console.log("Brand/Studio profile submitted successfully to Firebase Realtime Database:", formData);
       navigate('/thank-you');
 
     } catch (error) {
@@ -421,7 +432,7 @@ export const BrandsStudiosSignUp = () => {
               </button>
               <button
                 type="submit"
-                className="text-lg font-semibold bg-yellow-400 text-black px-8 py-3 border-2 border-black hover:bg-yellow-500 transition-colors"
+                className="text-lg font-semibold bg-yellow-400 text-black px-8 py-4 border-2 border-black hover:bg-yellow-500 transition-colors"
               >
                 Submit Application
               </button>
