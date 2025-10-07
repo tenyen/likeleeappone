@@ -43,7 +43,7 @@ export const BrandsStudiosSignUp = () => {
     selectedProjectTypes: [] as string[],
     otherProjectType: "",
     teamSize: "",
-    campaignScale: [] as string[],
+    campaignScale: [] as string[], // New field for campaign scale
     specificNeeds: "",
     password: "",
     confirmPassword: ""
@@ -113,19 +113,19 @@ export const BrandsStudiosSignUp = () => {
     }
 
     const profileData = {
-      companyName: formData.companyName,
-      firstName: formData.firstName,
-      lastName: formData.lastName,
-      email: formData.email,
-      phone: formData.phone,
-      website: formData.website,
-      selectedIndustry: formData.selectedIndustry,
-      otherIndustry: formData.otherIndustry,
-      selectedProjectTypes: formData.selectedProjectTypes,
-      otherProjectType: formData.otherProjectType,
-      teamSize: formData.teamSize,
-      campaignScale: formData.campaignScale, // Ensure this is correctly included
-      specificNeeds: formData.specificNeeds,
+      companyName: formData.companyName || "",
+      firstName: formData.firstName || "",
+      lastName: formData.lastName || "",
+      email: formData.email || "",
+      phone: formData.phone || "",
+      website: formData.website || "",
+      selectedIndustry: formData.selectedIndustry || "",
+      otherIndustry: formData.otherIndustry || "",
+      selectedProjectTypes: formData.selectedProjectTypes || [],
+      otherProjectType: formData.otherProjectType || "",
+      teamSize: formData.teamSize || "",
+      campaignScale: formData.campaignScale || [],
+      specificNeeds: formData.specificNeeds || "",
       // password: formData.password, // Omit storing password directly
       createdAt: serverTimestamp(), // Use serverTimestamp for Realtime Database
     };

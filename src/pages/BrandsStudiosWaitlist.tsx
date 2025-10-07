@@ -27,13 +27,13 @@ export const BrandsStudiosWaitlist = () => {
     e.preventDefault();
     
     const waitlistData = {
-      firstName: formData.firstName,
-      lastName: formData.lastName,
-      email: formData.email,
-      phone: formData.phone,
+      firstName: formData.firstName || "",
+      lastName: formData.lastName || "",
+      email: formData.email || "",
+      phone: formData.phone || "",
       waitlistType: 'Brands & Studios Waitlist',
-      projectTypes: formData.projectTypes,
-      frustration: formData.frustration,
+      projectTypes: formData.projectTypes || "",
+      frustration: formData.frustration || "",
       createdAt: serverTimestamp(), // Use serverTimestamp for Realtime Database
     };
 
@@ -208,7 +208,7 @@ export const BrandsStudiosWaitlist = () => {
                         name="frustration"
                         value={formData.frustration}
                         onChange={handleInputChange}
-                        className="text-base bg-stone-50 box-border caret-transparent flex h-12 leading-6 outline-[oklab(0.839909_-0.141908_-0.0158958_/_0.5)] text-start w-full border-2 border-black px-3 py-2 w-full"
+                        className="text-base bg-stone-50 border-2 border-black px-3 py-2 w-full"
                       >
                         <option value="">Select your biggest frustration</option>
                         <option value="too-expensive">Too expensive</option>

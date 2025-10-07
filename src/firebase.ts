@@ -1,7 +1,8 @@
 // src/firebase.ts
 import { initializeApp } from "firebase/app";
-import { getDatabase, ref as dbRef, push, set, serverTimestamp } from "firebase/database"; // Realtime Database imports
+import { getDatabase, ref as dbRef, push, serverTimestamp } from "firebase/database"; // Realtime Database imports
 import { getStorage, ref as storageRef, uploadBytes, getDownloadURL } from "firebase/storage";
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged } from "firebase/auth"; // Auth imports
 // import { getAnalytics } from "firebase/analytics"; // Analytics is optional for this task
 
 // Your web app's Firebase configuration
@@ -21,6 +22,7 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 // const analytics = getAnalytics(app); // Initialize Analytics if needed
 
-// Initialize Realtime Database and Storage
+// Initialize Realtime Database, Storage, and Auth
 export const db = getDatabase(app);
 export const storage = getStorage(app);
+export const auth = getAuth(app); // Export auth service

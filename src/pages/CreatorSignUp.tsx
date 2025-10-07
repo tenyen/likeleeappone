@@ -138,22 +138,21 @@ export const CreatorSignUp = () => {
         photoURL = await getDownloadURL(snapshot.ref);
       }
 
-      // Prepare data for Realtime Database
+      // Prepare data for Realtime Database, ensuring no undefined values
       const profileData = {
-        firstName: formData.firstName,
-        lastName: formData.lastName,
-        email: formData.email,
-        selectedCreatorContentTypes: formData.selectedCreatorContentTypes,
-        otherCreatorContentType: formData.otherCreatorContentType,
-        selectedAITools: formData.selectedAITools,
-        otherAITool: formData.otherAITool,
-        location: formData.location,
-        yearsExperience: formData.yearsExperience,
-        portfolioLink: formData.portfolioLink,
-        socialMediaLink: formData.socialMediaLink,
-        profilePhotoURL: photoURL, // Store the URL of the uploaded photo
-        // Passwords should ideally be handled by a secure authentication system, not stored directly.
-        createdAt: serverTimestamp(), // Use serverTimestamp for Realtime Database
+        firstName: formData.firstName || "",
+        lastName: formData.lastName || "",
+        email: formData.email || "",
+        selectedCreatorContentTypes: formData.selectedCreatorContentTypes || [],
+        otherCreatorContentType: formData.otherCreatorContentType || "",
+        selectedAITools: formData.selectedAITools || [],
+        otherAITool: formData.otherAITool || "",
+        location: formData.location || "",
+        yearsExperience: formData.yearsExperience || "",
+        portfolioLink: formData.portfolioLink || "",
+        socialMediaLink: formData.socialMediaLink || "",
+        profilePhotoURL: photoURL || "", // Ensure photoURL is an empty string if no photo
+        createdAt: serverTimestamp(),
       };
 
       console.log("Data being sent to Realtime Database (Creator):", profileData); // DEBUG LOG

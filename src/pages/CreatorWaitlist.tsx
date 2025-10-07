@@ -27,13 +27,13 @@ export const CreatorWaitlist = () => {
     e.preventDefault();
     
     const waitlistData = {
-      firstName: formData.firstName,
-      lastName: formData.lastName,
-      email: formData.email,
-      phone: formData.phone,
+      firstName: formData.firstName || "",
+      lastName: formData.lastName || "",
+      email: formData.email || "",
+      phone: formData.phone || "",
       waitlistType: 'Creator Waitlist',
-      motivation1: formData.motivation1,
-      motivation2: formData.motivation2,
+      motivation1: formData.motivation1 || "",
+      motivation2: formData.motivation2 || "",
       createdAt: serverTimestamp(), // Use serverTimestamp for Realtime Database
     };
 

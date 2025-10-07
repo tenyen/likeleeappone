@@ -158,28 +158,27 @@ export const SignUp = () => {
         photoURL = await getDownloadURL(snapshot.ref);
       }
 
-      // Prepare data for Realtime Database
+      // Prepare data for Realtime Database, ensuring no undefined values
       const profileData = {
-        firstName: formData.firstName,
-        lastName: formData.lastName,
-        email: formData.email,
-        selectedContentTypes: formData.selectedContentTypes,
-        otherContentType: formData.otherContentType,
-        selectedIndustries: formData.selectedIndustries,
-        location: formData.location,
-        birthdate: formData.birthdate,
-        genderExpression: formData.genderExpression,
-        pronouns: formData.pronouns,
-        hairColor: formData.hairColor,
-        eyeColor: formData.eyeColor,
-        skinTone: formData.skinTone,
-        heightRange: formData.heightRange,
-        vibeTags: formData.vibeTags,
-        ethnicity: formData.ethnicity,
-        profileVisibility: formData.profileVisibility,
-        profilePhotoURL: photoURL, // Store the URL of the uploaded photo
-        // Passwords should ideally be handled by a secure authentication system, not stored directly.
-        createdAt: serverTimestamp(), // Use serverTimestamp for Realtime Database
+        firstName: formData.firstName || "",
+        lastName: formData.lastName || "",
+        email: formData.email || "",
+        selectedContentTypes: formData.selectedContentTypes || [],
+        otherContentType: formData.otherContentType || "",
+        selectedIndustries: formData.selectedIndustries || [],
+        location: formData.location || "",
+        birthdate: formData.birthdate || "",
+        genderExpression: formData.genderExpression || "",
+        pronouns: formData.pronouns || "",
+        hairColor: formData.hairColor || "",
+        eyeColor: formData.eyeColor || "",
+        skinTone: formData.skinTone || "",
+        heightRange: formData.heightRange || "",
+        vibeTags: formData.vibeTags || [],
+        ethnicity: formData.ethnicity || "",
+        profileVisibility: formData.profileVisibility || "private",
+        profilePhotoURL: photoURL || "", // Ensure photoURL is an empty string if no photo
+        createdAt: serverTimestamp(),
       };
 
       console.log("Data being sent to Realtime Database (Faces):", profileData); // DEBUG LOG
