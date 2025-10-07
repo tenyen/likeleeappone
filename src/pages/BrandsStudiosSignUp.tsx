@@ -43,7 +43,7 @@ export const BrandsStudiosSignUp = () => {
     selectedProjectTypes: [] as string[],
     otherProjectType: "",
     teamSize: "",
-    campaignScale: [] as string[], // New field for campaign scale
+    campaignScale: [] as string[],
     specificNeeds: "",
     password: "",
     confirmPassword: ""
@@ -124,7 +124,7 @@ export const BrandsStudiosSignUp = () => {
       selectedProjectTypes: formData.selectedProjectTypes,
       otherProjectType: formData.otherProjectType,
       teamSize: formData.teamSize,
-      campaignScale: formData.campaignScale,
+      campaignScale: formData.campaignScale, // Ensure this is correctly included
       specificNeeds: formData.specificNeeds,
       // password: formData.password, // Omit storing password directly
       createdAt: serverTimestamp(), // Use serverTimestamp for Realtime Database
