@@ -438,32 +438,6 @@ export const MainContent = () => {
                 0%, 100% { transform: scale(1); }
                 50% { transform: scale(1.05); }
               }
-              @keyframes draw-face {
-                0% { 
-                  stroke-dashoffset: 50;
-                  opacity: 0;
-                }
-                50% {
-                  opacity: 1;
-                }
-                100% { 
-                  stroke-dashoffset: 0;
-                  opacity: 1;
-                }
-              }
-              @keyframes fade-in-face {
-                0% { 
-                  opacity: 0;
-                  transform: scale(0);
-                }
-                50% {
-                  transform: scale(1.1);
-                }
-                100% { 
-                  opacity: 1;
-                  transform: scale(1);
-                }
-              }
             `}</style>
             <svg className="w-32 h-32 md:w-40 md:h-40" viewBox="0 0 200 200">
               {/* Rotating sun rays */}
@@ -539,92 +513,23 @@ export const MainContent = () => {
                   opacity="0.4"
                 />
                 
-                {/* Cute face - animated drawing */}
-                {/* Left Eye - draws in */}
-                <circle 
-                  cx="90" 
-                  cy="95" 
-                  r="4" 
-                  fill="none"
-                  stroke="#000"
-                  strokeWidth="2"
-                  strokeDasharray="25"
-                  strokeDashoffset="25"
-                  style={{
-                    animation: 'draw-face 0.5s ease-out 1s forwards'
-                  }}
-                />
-                <circle 
-                  cx="90" 
-                  cy="95" 
-                  r="4" 
-                  fill="#000"
-                  opacity="0"
-                  style={{
-                    animation: 'fade-in-face 0.3s ease-out 1.5s forwards'
-                  }}
-                />
+                {/* Cute face */}
+                {/* Eyes */}
+                <circle cx="90" cy="95" r="4" fill="#000" />
+                <circle cx="110" cy="95" r="4" fill="#000" />
                 
-                {/* Right Eye - draws in */}
-                <circle 
-                  cx="110" 
-                  cy="95" 
-                  r="4" 
-                  fill="none"
-                  stroke="#000"
-                  strokeWidth="2"
-                  strokeDasharray="25"
-                  strokeDashoffset="25"
-                  style={{
-                    animation: 'draw-face 0.5s ease-out 1.2s forwards'
-                  }}
-                />
-                <circle 
-                  cx="110" 
-                  cy="95" 
-                  r="4" 
-                  fill="#000"
-                  opacity="0"
-                  style={{
-                    animation: 'fade-in-face 0.3s ease-out 1.7s forwards'
-                  }}
-                />
-                
-                {/* Smile - draws in */}
+                {/* Smile */}
                 <path
                   d="M 85 110 Q 100 118 115 110"
                   stroke="#000"
                   strokeWidth="2.5"
                   fill="none"
                   strokeLinecap="round"
-                  strokeDasharray="50"
-                  strokeDashoffset="50"
-                  style={{
-                    animation: 'draw-face 0.8s ease-out 1.8s forwards'
-                  }}
                 />
                 
-                {/* Rosy cheeks - fade in after face is drawn */}
-                <circle 
-                  cx="78" 
-                  cy="105" 
-                  r="6" 
-                  fill="#FF6B6B" 
-                  opacity="0"
-                  style={{
-                    animation: 'fade-in-face 0.5s ease-out 2.6s forwards'
-                  }}
-                />
-                <circle 
-                  cx="122" 
-                  cy="105" 
-                  r="6" 
-                  fill="#FF6B6B" 
-                  opacity="0"
-                  style={{
-                    animation: 'fade-in-face 0.5s ease-out 2.6s forwards'
-                  }}
-                />
+                {/* Rosy cheeks */}
+                <circle cx="78" cy="105" r="6" fill="#FF6B6B" opacity="0.3" />
+                <circle cx="122" cy="105" r="6" fill="#FF6B6B" opacity="0.3" />
               </g>
             </svg>
           </div>
