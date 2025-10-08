@@ -12,7 +12,7 @@ export const AICreators = () => {
           <Navbar />
           
           {/* Hero Section */}
-          <section className="box-border caret-transparent outline-[oklab(0.839909_-0.141908_-0.0158958_/_0.5)] py-24 md:py-32">
+          <section className="box-border caret-transparent outline-[oklab(0.839909_-0.141908_-0.0158958_/_0.5)] py-12 md:py-16">
             <div className="max-w-7xl mx-auto px-4">
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
                 {/* Left Side - Text Content */}

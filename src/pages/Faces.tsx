@@ -19,7 +19,7 @@ export const Faces = () => {
           <Navbar />
           
           {/* Hero Section */}
-          <section className="box-border caret-transparent outline-[oklab(0.839909_-0.141908_-0.0158958_/_0.5)] py-24 md:py-32 relative overflow-hidden">
+          <section className="box-border caret-transparent outline-[oklab(0.839909_-0.141908_-0.0158958_/_0.5)] py-12 md:py-16 relative overflow-hidden">
             {/* Decorative waves */}
             <div className="absolute inset-0 opacity-10">
               <svg className="absolute top-0 left-0 w-full h-full" viewBox="0 0 1440 800" fill="none">

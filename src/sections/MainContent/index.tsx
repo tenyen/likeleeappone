@@ -172,12 +172,47 @@ export const MainContent = () => {
           <div className="fixed bottom-0 left-0 right-0 pointer-events-none z-[90]" style={{ height: '80px' }}>
             <style>{`
               @keyframes grass-draw {
-                0% { stroke-dashoffset: 100; }
-                100% { stroke-dashoffset: 0; }
+                0% { 
+                  stroke-dashoffset: 100; 
+                  opacity: 0;
+                }
+                10% {
+                  opacity: 1;
+                }
+                100% { 
+                  stroke-dashoffset: 0; 
+                  opacity: 1;
+                }
+              }
+              @keyframes grass-grow-up {
+                0% { 
+                  transform: scaleY(0);
+                  opacity: 0;
+                }
+                20% {
+                  opacity: 1;
+                }
+                100% { 
+                  transform: scaleY(1);
+                  opacity: 1;
+                }
               }
               @keyframes grass-sway {
                 0%, 100% { transform: rotate(0deg); }
                 50% { transform: rotate(3deg); }
+              }
+              @keyframes flower-bloom {
+                0% { 
+                  transform: scale(0);
+                  opacity: 0;
+                }
+                50% {
+                  transform: scale(1.2);
+                }
+                100% { 
+                  transform: scale(1);
+                  opacity: 1;
+                }
               }
             `}</style>
             <svg className="w-full h-full" viewBox="0 0 1440 80" preserveAspectRatio="none">
@@ -197,7 +232,6 @@ export const MainContent = () => {
                 return (
                   <g key={i} style={{ 
                     transformOrigin: `${x}px 80px`,
-                    animation: `grass-sway ${3 + Math.random() * 2}s ease-in-out ${swayDelay}s infinite`
                   }}>
                     <path
                       d={path}
@@ -206,11 +240,12 @@ export const MainContent = () => {
                       fill="none"
                       strokeLinecap="round"
                       strokeLinejoin="round"
-                      opacity="0.9"
+                      opacity="0"
                       strokeDasharray="100"
-                      strokeDashoffset="0"
+                      strokeDashoffset="100"
                       style={{
-                        animation: `grass-draw 1.5s ease-out ${delay}s forwards`
+                        animation: `grass-draw 1.2s ease-out ${delay}s forwards, grass-sway ${3 + Math.random() * 2}s ease-in-out ${delay + 1.2 + swayDelay}s infinite`,
+                        transformOrigin: `${x}px 80px`
                       }}
                     />
                     {/* Add small details/tips to grass */}
@@ -236,8 +271,8 @@ export const MainContent = () => {
                 const delay = 2 + Math.random() * 2;
                 
                 return (
-                  <g key={`flower-${i}`} opacity="0" style={{
-                    animation: `grass-draw 0.8s ease-out ${delay}s forwards`
+                  <g key={`flower-${i}`} style={{
+                    transformOrigin: `${x}px ${y}px`
                   }}>
                     {/* Flower stem */}
                     <path
@@ -245,15 +280,26 @@ export const MainContent = () => {
                       stroke="#22C55E"
                       strokeWidth="2"
                       fill="none"
+                      strokeDasharray="50"
+                      strokeDashoffset="50"
+                      style={{
+                        animation: `grass-draw 0.6s ease-out ${delay}s forwards`
+                      }}
                     />
-                    {/* Flower petals */}
-                    <circle cx={x} cy={y} r="4" fill={flowerColor} opacity="0.9" />
-                    <circle cx={x - 3} cy={y - 1} r="3" fill={flowerColor} opacity="0.8" />
-                    <circle cx={x + 3} cy={y - 1} r="3" fill={flowerColor} opacity="0.8" />
-                    <circle cx={x - 2} cy={y + 2.5} r="3" fill={flowerColor} opacity="0.8" />
-                    <circle cx={x + 2} cy={y + 2.5} r="3" fill={flowerColor} opacity="0.8" />
-                    {/* Flower center */}
-                    <circle cx={x} cy={y} r="2" fill="#FFF" opacity="0.9" />
+                    {/* Flower petals - bloom animation */}
+                    <g style={{
+                      transformOrigin: `${x}px ${y}px`,
+                      animation: `flower-bloom 0.5s ease-out ${delay + 0.6}s forwards`,
+                      opacity: 0
+                    }}>
+                      <circle cx={x} cy={y} r="4" fill={flowerColor} opacity="0.9" />
+                      <circle cx={x - 3} cy={y - 1} r="3" fill={flowerColor} opacity="0.8" />
+                      <circle cx={x + 3} cy={y - 1} r="3" fill={flowerColor} opacity="0.8" />
+                      <circle cx={x - 2} cy={y + 2.5} r="3" fill={flowerColor} opacity="0.8" />
+                      <circle cx={x + 2} cy={y + 2.5} r="3" fill={flowerColor} opacity="0.8" />
+                      {/* Flower center */}
+                      <circle cx={x} cy={y} r="2" fill="#FFF" opacity="0.9" />
+                    </g>
                   </g>
                 );
               })}
@@ -262,11 +308,11 @@ export const MainContent = () => {
               {Array.from({ length: 30 }).map((_, i) => {
                 const x = Math.random() * 1440;
                 const delay = Math.random() * 2.5;
+                const swayDelay = Math.random() * 2;
                 
                 return (
                   <g key={`clump-${i}`} style={{
                     transformOrigin: `${x}px 80px`,
-                    animation: `grass-sway ${2.5 + Math.random()}s ease-in-out ${delay}s infinite`
                   }}>
                     {/* Multiple blades in a clump */}
                     {[0, 1, 2].map((blade) => {
@@ -282,10 +328,12 @@ export const MainContent = () => {
                           strokeWidth="2.5"
                           fill="none"
                           strokeLinecap="round"
-                          opacity="0.8"
+                          opacity="0"
                           strokeDasharray="100"
+                          strokeDashoffset="100"
                           style={{
-                            animation: `grass-draw 1.5s ease-out ${delay + blade * 0.1}s forwards`
+                            animation: `grass-draw 1.3s ease-out ${delay + blade * 0.15}s forwards, grass-sway ${2.5 + Math.random()}s ease-in-out ${delay + 1.3 + swayDelay}s infinite`,
+                            transformOrigin: `${x + offset}px 80px`
                           }}
                         />
                       );
